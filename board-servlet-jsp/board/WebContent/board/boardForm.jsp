@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <section class="container text-center">
-	<div class="mt-5 py-5">
+	<div class="mt-5 py-3">
 		<h1 class="fw-bold">게시판</h1>
 	</div>
 	<div class="col-12 mb-3 text-end">
