@@ -5,7 +5,10 @@
 	<div class="mt-5 py-5">
 		<h1 class="fw-bold">게시판</h1>
 	</div>
-
+	<div class="col-12 mb-3 text-end">
+		<button class="btn btn-outline-success rounded-4 fw-bold"
+			type="button">글 작성</button>
+	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr class="table-secondary">
@@ -33,4 +36,13 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<ul class="pagination justify-content-center">
+		<li class="page-item"><a class="page-link disabled" href="#">이전</a></li>
+		<li class="page-item"><a class="page-link active" href="#">1</a></li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#">4</a></li>
+		<li class="page-item"><a class="page-link" href="#">다음</a></li>
+	</ul>
 </section>
