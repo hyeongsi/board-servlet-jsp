@@ -1,4 +1,4 @@
-package com.servlet;
+package com.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/boardWrite")
-public class BoardWriteServlet extends HttpServlet {
+@WebServlet("/myProfile")
+public class MyProfileUIServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("boardWrite.jsp").forward(request, response);
+		// 로그인 여부 확인
+		request.getRequestDispatcher("myProfile.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
