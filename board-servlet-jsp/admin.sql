@@ -8,7 +8,7 @@ CREATE SEQUENCE servletboard.servletboard_id_seq;
 
 /* 계정 테이블 생성*/
 CREATE TABLE servletboard.member (
-  id varchar2(12) PRIMARY KEY,
+  userid varchar2(12) PRIMARY KEY,
   pw varchar2(16) not null,
   name varchar2(30) not null unique
 );
