@@ -21,6 +21,6 @@
 	</head>
 	<body>
 		<%@ include file="common/navBarForm.jsp"%> 
-		<%@ include file="member/registerMemberForm.jsp"%>
+		<%@ include file="member/registerSuccessForm.jsp"%>
 	</body>
 </html>
