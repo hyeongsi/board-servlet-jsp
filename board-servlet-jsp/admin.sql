@@ -6,6 +6,7 @@ GRANT connect, resource to servletboard;
 
 CREATE SEQUENCE servletboard.servletboard_id_seq;
 
+DROP TABLE servletboard.member;
 /* 계정 테이블 생성*/
 CREATE TABLE servletboard.member (
   userid varchar2(12) PRIMARY KEY,

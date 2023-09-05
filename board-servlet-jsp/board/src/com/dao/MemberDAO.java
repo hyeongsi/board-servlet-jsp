@@ -13,4 +13,8 @@ public class MemberDAO {
 	public MemberDTO nameCheck(SqlSession session, String name) {
 		return session.selectOne("MemberMapper.nameCheck", name);
 	}
+	
+	public int registerMember(SqlSession session, MemberDTO dto) {
+		return session.insert("MemberMapper.registerMember", dto);
+	}
 }

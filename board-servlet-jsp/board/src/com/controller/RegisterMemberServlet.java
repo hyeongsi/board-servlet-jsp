@@ -7,13 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dto.MemberDTO;
+import com.service.MemberService;
+import com.service.MemberServiceImpl;
+
 @WebServlet("/register")
 public class RegisterMemberServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userid = request.getParameter("userid");
+		String pw = request.getParameter("pw");
+		String name = request.getParameter("name");
 		
+		MemberDTO dto = new MemberDTO(userid, pw, name);
 		
-		request.getRequestDispatcher("registerMember.jsp").forward(request, response);
+		MemberService service = new MemberServiceImpl();
+		service.registerMember(dto);
+		
+		request.getRequestDispatcher("registerSuccess.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

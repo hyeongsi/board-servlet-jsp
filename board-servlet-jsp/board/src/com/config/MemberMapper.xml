@@ -18,6 +18,11 @@
 		from member
 		where name = #{name}
 	</select>
+	
+	<insert id="registerMember" parameterType="MemberDTO">
+		insert into member (userid, pw, name)
+		values (#{userid}, #{pw}, #{name})
+	</insert>
 
 
 </mapper>

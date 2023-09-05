@@ -21,9 +21,7 @@ $(document).ready(function () {
 			submitCkMsg(event, "비밀번호를 확인해주세요.", pw);
 		} else if (!isValidPw()) {
 			submitCkMsg(event, "비밀번호와 확인을 일치해주세요.", pwValid);
-		} else {
-			alert("통과");
-		}
+		} 
 	});
 
 	// userid 입력시 중복검사 결과 초기화
