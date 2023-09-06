@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="container">
 	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
 		<div class="col-md-3 mb-2 mb-md-0">
@@ -18,9 +19,20 @@
 			<li><a href="boardUI" class="nav-link px-2 link-secondary">홈</a></li>
 		</ul>
 
-		<div class="col-md-3 text-end">
-			<a href="loginMemberUI" class="btn btn-outline-primary me-2">로그인</a>
-			<a href="registerMemberUI" class="btn btn-primary">회원가입</a>
-		</div>
+		<c:choose>
+			<c:when test="${empty login}">
+				<div class="col-md-3 text-end">
+					<a href="loginMemberUI" class="btn btn-outline-primary me-2">로그인</a>
+					<a href="registerMemberUI" class="btn btn-primary">회원가입</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="col-md-3 text-end">
+					<a href="myProfileUI" class="btn btn-outline-primary me-2">내정보</a>
+					<a href="logoutMember" class="btn btn-primary">로그아웃</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		
 	</header>
 </div>
