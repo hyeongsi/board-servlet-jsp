@@ -12,8 +12,8 @@
 		</div>
 		<div class="col-12 col-xl-10">
 			<div class="form-floating">
-				<input type="text" class="form-control rounded-4" name="userId" id="userId" placeholder="아이디" maxlength="12" disabled />
-				<label for="userId">아이디</label>
+				<input type="text" class="form-control rounded-4" name="userid" id="userid" placeholder="아이디" maxlength="12" disabled />
+				<label for="userid">아이디</label>
 				<div class="invalid-feedback">아이디는 2~12자, 영문 대소문자, 숫자만 사용 가능합니다.</div>
 			</div>
 		</div>

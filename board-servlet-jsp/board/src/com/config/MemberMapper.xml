@@ -24,5 +24,10 @@
 		values (#{userid}, #{pw}, #{name})
 	</insert>
 
+	<select id="loginMember" parameterType="hashmap" resultType="MemberDTO">
+		select userid, pw, name
+		from member
+		where userid = #{userid} and pw = #{pw}
+	</select>
 
 </mapper>
