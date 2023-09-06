@@ -6,12 +6,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.dto.MemberDTO;
 
 @WebServlet("/boardWriteUI")
 public class BoardWriteUIServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("boardWrite.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		
+		String nextPage = null;
+		if(dto != null) {
+			nextPage = "boardWrite.jsp";
+		}else {			
+			nextPage = "member/needLogin.jsp";
+		}
+		
+		response.sendRedirect(nextPage);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

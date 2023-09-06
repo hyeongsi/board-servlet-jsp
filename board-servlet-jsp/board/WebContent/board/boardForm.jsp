@@ -5,10 +5,14 @@
 	<div class="mt-5 py-3">
 		<h1 class="fw-bold">게시판</h1>
 	</div>
-	<div class="col-12 mb-3 text-end">
-		<button class="btn btn-outline-success rounded-4 fw-bold"
-			type="button">글 작성</button>
-	</div>
+	<c:choose>
+		<c:when test="${not empty login}">
+			<div class="col-12 mb-3 text-end">
+				<a href="boardWriteUI" class="btn btn-outline-success rounded-4 fw-bold"
+					type="button">글 작성</a>
+			</div>
+		</c:when>
+	</c:choose>
 	<table class="table table-striped">
 		<thead>
 			<tr class="table-secondary">
