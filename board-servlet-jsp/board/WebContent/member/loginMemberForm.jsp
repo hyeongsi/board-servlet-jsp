@@ -6,7 +6,7 @@
 		<h1 class="fw-bold">로그인</h1>
 	</div>
 
-	<form action="" method="" class="row g-3 w-75 m-auto justify-content-center">
+	<form action="#" method="post" class="row g-3 w-75 m-auto justify-content-center">
 		<div class="col-12 col-xl-10">
 			<div class="form-floating">
 				<input type="text" class="form-control rounded-4" name="userId" id="userId" placeholder="아이디" maxlength="12" required />

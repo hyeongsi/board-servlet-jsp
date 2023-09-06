@@ -19,8 +19,8 @@
 		</ul>
 
 		<div class="col-md-3 text-end">
-			<a href="loginUI" class="btn btn-outline-primary me-2">로그인</a>
-			<a href="registerUI" class="btn btn-primary">회원가입</a>
+			<a href="loginMemberUI" class="btn btn-outline-primary me-2">로그인</a>
+			<a href="registerMemberUI" class="btn btn-primary">회원가입</a>
 		</div>
 	</header>
 </div>

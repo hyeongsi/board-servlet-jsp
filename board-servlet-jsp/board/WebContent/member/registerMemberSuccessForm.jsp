@@ -6,5 +6,5 @@
 		<h1 class="fw-bold">가입해 주셔서 감사합니다.</h1>
 	</div>
 
-	<a href="loginUI" class="btn btn-primary btn-lg mt-5">로그인</a>
+	<a href="loginMemberUI" class="btn btn-primary btn-lg mt-5">로그인</a>
 </section>

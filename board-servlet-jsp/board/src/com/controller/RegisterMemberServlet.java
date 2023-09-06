@@ -11,7 +11,7 @@ import com.dto.MemberDTO;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 
-@WebServlet("/register")
+@WebServlet("/registerMember")
 public class RegisterMemberServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

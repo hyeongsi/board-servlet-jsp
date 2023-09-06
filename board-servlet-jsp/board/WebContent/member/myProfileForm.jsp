@@ -6,7 +6,7 @@
 		<h1 class="fw-bold">내 정보</h1>
 	</div>
 
-	<form action="" method="" class="row g-3 w-75 m-auto justify-content-center">
+	<form action="#" method="post" class="row g-3 w-75 m-auto justify-content-center">
 		<div class="col-12 col-xl-10 text-end">
 			<button class="btn btn-danger rounded-4" type="button">회원 탈퇴</button>
 		</div>

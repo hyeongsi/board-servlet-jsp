@@ -8,19 +8,15 @@
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 			rel="stylesheet"
-			integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-			crossorigin="anonymous"
 		/>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-			crossorigin="anonymous"
 		></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 		<script src="member/js/registerValid.js"></script>
 	</head>
 	<body>
 		<%@ include file="common/navBarForm.jsp"%> 
-		<%@ include file="member/registerSuccessForm.jsp"%>
+		<%@ include file="member/registerMemberSuccessForm.jsp"%>
 	</body>
 </html>
