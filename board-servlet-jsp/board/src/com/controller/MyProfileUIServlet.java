@@ -25,7 +25,7 @@ public class MyProfileUIServlet extends HttpServlet {
 			nextPage = "member/needLogin.jsp";
 		}
 		
-		response.sendRedirect(nextPage);
+		request.getRequestDispatcher(nextPage).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
