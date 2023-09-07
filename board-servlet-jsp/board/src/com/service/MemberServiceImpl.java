@@ -82,4 +82,19 @@ public class MemberServiceImpl implements MemberService {
 		return n;
 	}
 
+	@Override
+	public int editMember(MemberDTO dto) {
+		int n = 0;
+		
+		SqlSession session = MySqlSessionFactory.getSession();
+		try {
+			MemberDAO dao = new MemberDAO();
+			n = dao.editMember(session, dto);
+			session.commit();
+		}finally {
+			session.close();
+		}
+		return n;
+	}
+
 }

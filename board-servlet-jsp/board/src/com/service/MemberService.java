@@ -11,4 +11,5 @@ public interface MemberService {
 	public int registerMember(MemberDTO dto);
 	public MemberDTO loginMember(HashMap<String, String> loginMap);
 	public int deleteMember(String userid);
+	public int editMember(MemberDTO dto);
 }

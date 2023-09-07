@@ -23,7 +23,7 @@ public class DeleteMemberServlet extends HttpServlet {
 		if(dto != null) {
 			String userid = request.getParameter("userid");
 			MemberService service = new MemberServiceImpl();
-			service.deleteMember(userid);
+			int n = service.deleteMember(userid);
 			
 			nextPage = "boardUI";
 			session.invalidate();  // 로그아웃

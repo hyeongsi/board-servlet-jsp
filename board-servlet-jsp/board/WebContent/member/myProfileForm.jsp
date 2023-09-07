@@ -12,17 +12,19 @@
 			<button class="btn btn-danger rounded-4" type="button" id="deleteMemberBtn">회원 탈퇴</button>
 		</div>
 	</form>
-	<form action="editMember" method="post" class="row g-3 w-75 m-auto justify-content-center">	
+	<form action="editMember" method="post" class="row g-3 w-75 m-auto justify-content-center" id="editMemberForm">	
 		<div class="col-12 col-xl-10">
 			<div class="form-floating">
-				<input type="text" class="form-control rounded-4" name="userid" id="userid" value="${login.userid}" placeholder="아이디" maxlength="12" disabled />
+				<input type="text" class="form-control rounded-4" value="${login.userid}" placeholder="아이디" maxlength="12" disabled />
+				<input type="hidden" name="userid" value="${login.userid}">
 				<label for="userid">아이디</label>
 				<div class="invalid-feedback">아이디는 2~12자, 영문 대소문자, 숫자만 사용 가능합니다.</div>
 			</div>
 		</div>
 		<div class="col-12 col-xl-10">
 			<div class="form-floating">
-				<input type="text" class="form-control rounded-4" name="name" id="name" value="${login.name}" placeholder="이름" maxlength="10" disabled/>
+				<input type="text" class="form-control rounded-4" value="${login.name}" placeholder="이름" maxlength="10" disabled/>
+				<input type="hidden" name="name" value="${login.name}">
 				<label for="name">이름</label>
 				<div class="invalid-feedback">닉네임은 2 ~10자, 특수문자를 제외한 한글,영문 대소문자, 숫자만 사용 가능합니다.</div>
 			</div>

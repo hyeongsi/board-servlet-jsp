@@ -18,6 +18,7 @@
 		></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 		<script src="member/js/deleteConfirm.js"></script>
+		<script src="member/js/editMemberValid.js"></script>
 	</head>
 	<body>
 		<%@ include file="common/navBarForm.jsp"%> <%@ include file="member/myProfileForm.jsp"%>

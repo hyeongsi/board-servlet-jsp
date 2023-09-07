@@ -23,11 +23,16 @@ public class EditMemberServlet extends HttpServlet {
 		
 		String nextPage = null;
 		if(dto != null) {
+			String userid = request.getParameter("userid");
+			String pw = request.getParameter("pw");
+			String name = request.getParameter("name");
+			
+			MemberDTO editDTO = new MemberDTO(userid, pw, name);
+			
 			MemberService service = new MemberServiceImpl();
-			// service.delete
+			int n = service.editMember(editDTO);
 			
 			nextPage = "boardUI";
-			session.invalidate();  // 로그아웃
 		}else {			
 			nextPage = "member/needLogin.jsp";
 		}

@@ -34,5 +34,11 @@
 		delete from member
 		where userid = #{userid}
 	</delete>
+	
+	<update id="editMember" parameterType="MemberDTO">
+		update member 
+		set pw = #{pw}
+		where userid = #{userid}
+	</update>
 
 </mapper>

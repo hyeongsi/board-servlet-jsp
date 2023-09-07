@@ -27,4 +27,8 @@ public class MemberDAO {
 	public int deleteMember(SqlSession session, String userid) {
 		return session.delete("MemberMapper.deleteMember", userid);
 	}
+	
+	public int editMember(SqlSession session, MemberDTO dto) {
+		return session.update("MemberMapper.editMember", dto);
+	}
 }
