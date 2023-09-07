@@ -10,4 +10,5 @@ public interface MemberService {
 	public MemberDTO nameCheck(String name);
 	public int registerMember(MemberDTO dto);
 	public MemberDTO loginMember(HashMap<String, String> loginMap);
+	public int deleteMember(String userid);
 }

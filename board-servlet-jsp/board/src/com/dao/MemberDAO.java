@@ -23,4 +23,8 @@ public class MemberDAO {
 	public MemberDTO loginMember(SqlSession session, HashMap<String, String> loginMap) {
 		return session.selectOne("MemberMapper.loginMember", loginMap);
 	}
+	
+	public int deleteMember(SqlSession session, String userid) {
+		return session.delete("MemberMapper.deleteMember", userid);
+	}
 }

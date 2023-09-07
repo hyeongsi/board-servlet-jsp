@@ -29,5 +29,10 @@
 		from member
 		where userid = #{userid} and pw = #{pw}
 	</select>
+	
+	<delete id="deleteMember" parameterType="string">
+		delete from member
+		where userid = #{userid}
+	</delete>
 
 </mapper>

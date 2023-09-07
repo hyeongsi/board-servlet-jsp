@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8" />
+	<head>
+		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>내 정보</title>
 		<link
@@ -17,11 +16,10 @@
 			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
 			crossorigin="anonymous"
 		></script>
-</head>
-<body>
-	<%@ include file="common/navBarForm.jsp"%>
-	
-	<%@ include file="member/myProfileForm.jsp"%>
-
-</body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+		<script src="member/js/deleteConfirm.js"></script>
+	</head>
+	<body>
+		<%@ include file="common/navBarForm.jsp"%> <%@ include file="member/myProfileForm.jsp"%>
+	</body>
 </html>

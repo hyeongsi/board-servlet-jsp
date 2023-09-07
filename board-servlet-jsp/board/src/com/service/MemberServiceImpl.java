@@ -67,4 +67,19 @@ public class MemberServiceImpl implements MemberService {
 		return dto;
 	}
 
+	@Override
+	public int deleteMember(String userid) {
+		int n = 0;
+		
+		SqlSession session = MySqlSessionFactory.getSession();
+		try {
+			MemberDAO dao = new MemberDAO();
+			n = dao.deleteMember(session, userid);
+			session.commit();
+		}finally {
+			session.close();
+		}
+		return n;
+	}
+
 }
