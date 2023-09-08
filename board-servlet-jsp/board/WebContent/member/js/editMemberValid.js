@@ -14,7 +14,7 @@ $(document).ready(function () {
 	});
 
 	// pw 유효성 체크 후 유효성 여부에 맞는 클래스 추가
-	pw.on("ketdown keypress keyup change", function () {
+	pw.on("keydown keypress keyup change", function () {
 		if (isValid(pwCheck, $(this))) {
 			setValid($(this));
 		} else {
@@ -24,7 +24,7 @@ $(document).ready(function () {
 		pwValid.trigger("change");
 	});
 	// pw 유효성 체크 후 유효성 여부에 맞는 클래스 추가
-	pwValid.on("ketdown keypress keyup change", function () {
+	pwValid.on("keydown keypress keyup change", function () {
 		if (isValidPw(pwCheck, $(this))) {
 			setValid($(this));
 		} else {
