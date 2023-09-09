@@ -20,12 +20,12 @@
 	</select>
 	
 	<insert id="registerMember" parameterType="MemberDTO">
-		insert into member (userid, pw, name)
-		values (#{userid}, #{pw}, #{name})
+		insert into member (id, userid, pw, name)
+		values (member_seq.nextval, #{userid}, #{pw}, #{name})
 	</insert>
 
 	<select id="loginMember" parameterType="hashmap" resultType="MemberDTO">
-		select userid, pw, name
+		select id, userid, pw, name
 		from member
 		where userid = #{userid} and pw = #{pw}
 	</select>

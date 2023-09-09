@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <section class="container text-center">
-	<div class="mt-5 py-3">
-		<h1 class="fw-bold">글 작성</h1>
-	</div>
-
-	<form action="addBoard" method="post" class="row g-3 w-75 m-auto justify-content-center">
+	<form action="boardWrite" method="post" class="row g-3 w-75 m-auto justify-content-center">
 		<div class="col-12 col-xl-10">
 			<div class="text-start">
-				<textarea style="resize: none" class="form-control rounded-4" name="title" id="title" placeholder="제목" required></textarea>
+				<textarea style="resize: none" class="form-control rounded-4" name="title" id="title" readonly></textarea>
 			</div>
 		</div>
 		<div class="col-12 col-xl-10">
@@ -17,9 +13,7 @@
 				class="form-control rounded-4"
 				name="boardcontent"
 				id="boardcontent"
-				placeholder="내용"
-				onchange="fn_checkByte(this,4000)"
-				required
+				readonly
 			></textarea>
 		</div>
 		<div class="col-12 mt-5">

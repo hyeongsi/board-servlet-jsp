@@ -2,6 +2,7 @@ package com.dto;
 
 public class MemberDTO {
 	
+	int id;
 	String userid;
 	String pw;
 	String name;
@@ -13,6 +14,12 @@ public class MemberDTO {
 		this.name = name;
 	}
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getUserid() {
 		return userid;
 	}

@@ -1,17 +1,31 @@
-package com.controller;
+package com.controller.myprofile;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/registerMemberUI")
-public class RegisterMemberUIServlet extends HttpServlet {    
+import com.dto.MemberDTO;
+
+@WebServlet("/myProfileUI")
+public class MyProfileUIServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("registerMember.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		
+		String nextPage = null;
+		if(dto != null) {
+			nextPage = "myProfile.jsp";
+		}else {			
+			nextPage = "member/needLogin.jsp";
+		}
+		
+		request.getRequestDispatcher(nextPage).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

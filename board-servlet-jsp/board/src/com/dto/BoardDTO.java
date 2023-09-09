@@ -1,22 +1,16 @@
 package com.dto;
 
 public class BoardDTO {
-	int boardid;
-	String title;
-	String boardcontent;
-	String writetime;
-	int viewcnt;
-	String name;
+	int boardid;			// 게시판 id
+	String title;			// 제목
+	String boardcontent;	// 내용
+	String writetime;		// 작성 시간
+	int viewcnt;			// 조회수
+	String name;			// 작성자명
+
+	int id;					// 작성자식별 id
 	
 	public BoardDTO() {}
-	public BoardDTO(int boardid, String title, String boardcontent, String writetime, int viewcnt, String name) {
-		this.boardid = boardid;
-		this.title = title;
-		this.boardcontent = boardcontent;
-		this.writetime = writetime;
-		this.viewcnt = viewcnt;
-		this.name = name;
-	}
 	
 	public int getBoardid() {
 		return boardid;
@@ -55,5 +49,10 @@ public class BoardDTO {
 		this.name = name;
 	}
 	
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 }

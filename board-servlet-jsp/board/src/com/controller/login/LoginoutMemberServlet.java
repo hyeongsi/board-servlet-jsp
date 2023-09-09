@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.login;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,28 +14,19 @@ import com.dto.MemberDTO;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 
-@WebServlet("/loginMember")
-public class LoginMemberServlet extends HttpServlet {    
+@WebServlet("/logoutMember")
+public class LoginoutMemberServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		String userid = request.getParameter("userid");
-		String pw = request.getParameter("pw");
-		
-		HashMap<String, String> loginMap = new HashMap<String, String>();
-		loginMap.put("userid", userid);
-		loginMap.put("pw", pw);
-		
-		MemberService service = new MemberServiceImpl();
-		MemberDTO dto = service.loginMember(loginMap);
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		
 		String nextPage = null;
 		if(dto != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("login", dto);
-			
 			nextPage = "boardUI";
-		}else {
-			nextPage = "member/loginFail.jsp";
+			session.invalidate();  // 로그아웃
+		}else {			
+			nextPage = "member/needLogin.jsp";
 		}
 		
 		response.sendRedirect(nextPage);

@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.login;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,27 +14,28 @@ import com.dto.MemberDTO;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 
-@WebServlet("/editMember")
-public class EditMemberServlet extends HttpServlet {    
+@WebServlet("/loginMember")
+public class LoginMemberServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		HttpSession session = request.getSession();
-		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		String userid = request.getParameter("userid");
+		String pw = request.getParameter("pw");
+		
+		HashMap<String, String> loginMap = new HashMap<String, String>();
+		loginMap.put("userid", userid);
+		loginMap.put("pw", pw);
+		
+		MemberService service = new MemberServiceImpl();
+		MemberDTO dto = service.loginMember(loginMap);
 		
 		String nextPage = null;
 		if(dto != null) {
-			String userid = request.getParameter("userid");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			
-			MemberDTO editDTO = new MemberDTO(userid, pw, name);
-			
-			MemberService service = new MemberServiceImpl();
-			int n = service.editMember(editDTO);
+			HttpSession session = request.getSession();
+			session.setAttribute("login", dto);
 			
 			nextPage = "boardUI";
-		}else {			
-			nextPage = "member/needLogin.jsp";
+		}else {
+			nextPage = "member/loginFail.jsp";
 		}
 		
 		response.sendRedirect(nextPage);

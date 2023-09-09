@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="container text-center">
 	<div class="mt-5 py-3">
@@ -8,8 +7,7 @@
 	<c:choose>
 		<c:when test="${not empty login}">
 			<div class="col-12 mb-3 text-end">
-				<a href="boardWriteUI" class="btn btn-outline-success rounded-4 fw-bold"
-					type="button">글 작성</a>
+				<a href="boardWriteUI" class="btn btn-outline-success rounded-4 fw-bold" type="button">글 작성</a>
 			</div>
 		</c:when>
 	</c:choose>
@@ -24,20 +22,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>제목1</td>
-				<td>이순신</td>
-				<td>23.08.27</td>
-				<td>0</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>제목2</td>
-				<td>유관순</td>
-				<td>23.08.28</td>
-				<td>1</td>
-			</tr>
+			<c:forEach var="dto" items="${pageDTO.list}">
+				<tr style="cursor: pointer" onclick="location.href='boardDetailUI?boardid=${dto.boardid}'">
+					<td>${dto.boardid}</td>
+					<td>${dto.title}</td>
+					<td>${dto.name}</td>
+					<td>${dto.writetime}</td>
+					<td>${dto.viewcnt}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 

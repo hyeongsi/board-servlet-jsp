@@ -1,36 +1,33 @@
 package com.service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.BoardDAO;
-import com.dao.MemberDAO;
-import com.dto.MemberDTO;
+import com.dto.BoardDTO;
+import com.dto.PageDTO;
 
 public class BoardServiceImpl implements BoardService {
 
-	public int writeBoard(String title, String boardcontent, String userid) {
+	public int addBoard(String title, String boardcontent, String name, int id) {
 		final int titleByte = 100;
 		final int boardcontentByte = 4000;
 		int n = 0;
 		
 		SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			MemberDAO memberDAO = new MemberDAO();
-			MemberDTO memberDTO = memberDAO.useridCheck(session, userid);
-			
 			if(title.getBytes().length <= titleByte && 
 					boardcontent.getBytes().length <= boardcontentByte) {
-				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("title", title);
-				map.put("boardcontent", boardcontent);
-				map.put("name", memberDTO.getName());
+
+				BoardDTO dto = new BoardDTO();
+				dto.setTitle(title);
+				dto.setBoardcontent(boardcontent);
+				dto.setName(name);
+				dto.setId(id);
 				
 				BoardDAO boardDAO = new BoardDAO();
-				n = boardDAO.writeBoard(session, map);
+				n = boardDAO.addBoard(session, dto);
+				
 				session.commit();
 			}else {
 				return 0;
@@ -42,6 +39,24 @@ public class BoardServiceImpl implements BoardService {
 			session.close();
 		}
 		return n;
+	}
+
+	@Override
+	public PageDTO list(int curPage) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		PageDTO pageDTO = null;
+		
+		try {	
+			BoardDAO boardDAO = new BoardDAO();
+			pageDTO = boardDAO.list(session, curPage);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return pageDTO;
 	}
 
 }

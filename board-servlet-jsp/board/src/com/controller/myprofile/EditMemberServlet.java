@@ -1,6 +1,8 @@
-package com.controller;
+package com.controller.myprofile;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,27 +14,30 @@ import com.dto.MemberDTO;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 
-@WebServlet("/deleteMember")
-public class DeleteMemberServlet extends HttpServlet {
+@WebServlet("/editMember")
+public class EditMemberServlet extends HttpServlet {    
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		
 		String nextPage = null;
 		if(dto != null) {
 			String userid = request.getParameter("userid");
+			String pw = request.getParameter("pw");
+			String name = request.getParameter("name");
+			
+			MemberDTO editDTO = new MemberDTO(userid, pw, name);
+			
 			MemberService service = new MemberServiceImpl();
-			int n = service.deleteMember(userid);
+			int n = service.editMember(editDTO);
 			
 			nextPage = "boardUI";
-			session.invalidate();  // 로그아웃
 		}else {			
 			nextPage = "member/needLogin.jsp";
 		}
 		
 		response.sendRedirect(nextPage);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
