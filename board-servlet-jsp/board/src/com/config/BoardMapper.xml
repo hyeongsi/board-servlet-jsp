@@ -37,4 +37,9 @@
 		select count(*)
 		from board
 	</select>
+	
+	<update id="updateBoard" parameterType="BoardDTO">
+		update board set title = #{title}, boardcontent = #{boardcontent}
+		where boardid = #{boardid} 
+	</update>
 </mapper>

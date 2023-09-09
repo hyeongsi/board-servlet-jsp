@@ -96,4 +96,28 @@ public class BoardServiceImpl implements BoardService {
 		return n;
 	}
 
+	@Override
+	public int updateBoard(int boardid, String title, String boardcontent) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		
+		try {	
+			BoardDTO dto = new BoardDTO();
+			dto.setBoardid(boardid);
+			dto.setTitle(title);
+			dto.setBoardcontent(boardcontent);
+			
+			BoardDAO boardDAO = new BoardDAO();
+			n = boardDAO.updateBoard(session, dto);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return n;
+	}
+
 }

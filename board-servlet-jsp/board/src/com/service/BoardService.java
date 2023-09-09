@@ -9,4 +9,5 @@ public interface BoardService {
 	public PageDTO list(int curPage);
 	public BoardDTO boardDetail(int boardid); 
 	public int increaseViewcnt(int boardid);
+	public int updateBoard(int boardid, String title, String boardcontent);
 }

@@ -3,7 +3,7 @@ $(document).ready(function () {
 		fn_checkByte(this, 100);
 	});
 
-	$("#title").on("keydown keypress keyup change", function () {
+	$("#boardcontent").on("keydown keypress keyup change", function () {
 		fn_checkByte(this, 4000);
 	});
 });

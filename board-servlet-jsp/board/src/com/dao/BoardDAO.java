@@ -35,4 +35,8 @@ public class BoardDAO {
 	public int increaseViewcnt(SqlSession session, int boardid) {
 		return session.update("BoardMapper.increaseViewcnt", boardid);
 	}
+	
+	public int updateBoard(SqlSession session, BoardDTO dto) {
+		return session.update("BoardMapper.updateBoard", dto);
+	}
 }
