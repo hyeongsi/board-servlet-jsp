@@ -24,11 +24,11 @@
 		<tbody>
 			<c:forEach var="dto" items="${pageDTO.list}">
 				<tr style="cursor: pointer" onclick="location.href='boardDetailUI?boardid=${dto.boardid}'">
-					<td>${dto.boardid}</td>
-					<td>${dto.title}</td>
-					<td>${dto.name}</td>
-					<td>${dto.writetime}</td>
-					<td>${dto.viewcnt}</td>
+					<td><c:out value="${dto.boardid}" /></td>
+					<td><c:out value="${dto.title}" /></td>
+					<td><c:out value="${dto.name}" /></td>
+					<td><c:out value="${dto.writetime}" /></td>
+					<td><c:out value="${dto.viewcnt}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -26,7 +26,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="col-md-3 text-end gap-3">
-					<span class="fw-bold">${login.name} 님</span>
+					<span class="fw-bold"><c:out value="${login.name} 님" /></span>
 					<a href="myProfileUI" class="btn btn-outline-primary">내정보</a>
 					<a href="logoutMember" class="btn btn-primary">로그아웃</a>
 				</div>

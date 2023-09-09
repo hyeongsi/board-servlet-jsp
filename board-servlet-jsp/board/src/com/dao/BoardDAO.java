@@ -27,4 +27,12 @@ public class BoardDAO {
 		
 		return pageDTO;
 	}
+	
+	public BoardDTO boardDetail(SqlSession session, int boardid) {
+		return session.selectOne("BoardMapper.boardDetail", boardid);
+	}
+	
+	public int increaseViewcnt(SqlSession session, int boardid) {
+		return session.update("BoardMapper.increaseViewcnt", boardid);
+	}
 }

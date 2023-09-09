@@ -21,6 +21,18 @@
 		order by a.boardid desc
 	</select>
 	
+	<select id="boardDetail" parameterType="int" resultType="BoardDTO">
+		select a.boardid, a.title, a.writetime, a.boardcontent, a.viewcnt, a.name, b.id
+		from board a
+		inner join board_writter b on a.boardid = b.boardid
+		where a.boardid = #{boardid}
+	</select>
+	
+	<update id="increaseViewcnt" parameterType="int">
+		update board set viewcnt = viewcnt + 1
+		where boardid = #{boardid} 
+	</update>
+	
 	<select id="totalCount" resultType="int">
 		select count(*)
 		from board

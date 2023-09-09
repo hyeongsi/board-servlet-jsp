@@ -59,4 +59,41 @@ public class BoardServiceImpl implements BoardService {
 		return pageDTO;
 	}
 
+	@Override
+	public BoardDTO boardDetail(int boardid) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		BoardDTO dto = null;
+		
+		try {	
+			BoardDAO boardDAO = new BoardDAO();
+			dto = boardDAO.boardDetail(session, boardid);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public int increaseViewcnt(int boardid) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		
+		try {	
+			BoardDAO boardDAO = new BoardDAO();
+			n = boardDAO.increaseViewcnt(session, boardid);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return n;
+	}
+
 }

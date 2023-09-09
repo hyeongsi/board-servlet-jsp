@@ -36,7 +36,7 @@ public class AddBoardServlet extends HttpServlet {
 				mesg = "게시글 작성 완료";
 			}
 			request.setAttribute("mesg", mesg);
-			nextPage = "board/boardWriteAlert.jsp";
+			nextPage = "board/boardAlert.jsp";
 		}else {			
 			nextPage = "member/needLogin.jsp";
 		}

@@ -12,15 +12,7 @@
 			</div>
 		</div>
 		<div class="col-12 col-xl-10">
-			<textarea
-				style="height: 16rem; resize: none"
-				class="form-control rounded-4"
-				name="boardcontent"
-				id="boardcontent"
-				placeholder="내용"
-				onchange="fn_checkByte(this,4000)"
-				required
-			></textarea>
+			<textarea style="height: 16rem; resize: none" class="form-control rounded-4" name="boardcontent" id="boardcontent" placeholder="내용" required></textarea>
 		</div>
 		<div class="col-12 mt-5">
 			<button class="btn btn-primary rounded-4" type="submit">작성하기</button>

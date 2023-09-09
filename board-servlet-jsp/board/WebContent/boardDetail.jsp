@@ -17,7 +17,6 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-		<script src="board/js/boardConfirm.js"></script>
 	</head>
 	<body>
 		<%@ include file="common/navBarForm.jsp"%> <%@ include file="board/boardDetailForm.jsp"%>
