@@ -5,7 +5,7 @@
 		<h1 class="fw-bold">글 작성</h1>
 	</div>
 
-	<form action="addBoard" method="post" class="row g-3 w-75 m-auto justify-content-center">
+	<form action="boardAdd" method="post" class="row g-3 w-75 m-auto justify-content-center">
 		<div class="col-12 col-xl-10">
 			<div class="text-start">
 				<textarea style="resize: none" class="form-control rounded-4" name="title" id="title" placeholder="제목" required></textarea>

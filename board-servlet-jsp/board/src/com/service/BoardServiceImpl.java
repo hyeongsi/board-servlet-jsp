@@ -9,7 +9,7 @@ import com.dto.PageDTO;
 
 public class BoardServiceImpl implements BoardService {
 
-	public int addBoard(String title, String boardcontent, String name, int id) {
+	public int boardAdd(String title, String boardcontent, String name, int id) {
 		final int titleByte = 100;
 		final int boardcontentByte = 4000;
 		int n = 0;
@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 				dto.setId(id);
 				
 				BoardDAO boardDAO = new BoardDAO();
-				n = boardDAO.addBoard(session, dto);
+				n = boardDAO.boardAdd(session, dto);
 				
 				session.commit();
 			}else {
@@ -97,7 +97,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int updateBoard(int boardid, String title, String boardcontent) {
+	public int boardUpdate(int boardid, String title, String boardcontent) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		
@@ -108,7 +108,26 @@ public class BoardServiceImpl implements BoardService {
 			dto.setBoardcontent(boardcontent);
 			
 			BoardDAO boardDAO = new BoardDAO();
-			n = boardDAO.updateBoard(session, dto);
+			n = boardDAO.boardUpdate(session, dto);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return n;
+	}
+
+	@Override
+	public int boardDelete(int boardid) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		
+		try {
+			BoardDAO boardDAO = new BoardDAO();
+			n = boardDAO.boardDelete(session, boardid);
 			
 			session.commit();
 		} catch (Exception e) {

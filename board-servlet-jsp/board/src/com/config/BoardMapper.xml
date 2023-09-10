@@ -5,7 +5,7 @@
 
 <mapper namespace="BoardMapper">
 	
-	<update id="addBoard" parameterType="BoardDTO">
+	<update id="boardAdd" parameterType="BoardDTO">
 		insert all
 	  	into board (boardid, title, boardcontent, name)
 	  		values (board_seq.nextval, #{title}, #{boardcontent}, #{name})
@@ -38,8 +38,14 @@
 		from board
 	</select>
 	
-	<update id="updateBoard" parameterType="BoardDTO">
+	<update id="boardUpdate" parameterType="BoardDTO">
 		update board set title = #{title}, boardcontent = #{boardcontent}
 		where boardid = #{boardid} 
 	</update>
+	
+	<delete id="boardDelete" parameterType="int">
+		delete from board
+		where boardid = #{boardid}
+	</delete>
+	
 </mapper>

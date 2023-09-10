@@ -12,8 +12,8 @@ import com.dto.MemberDTO;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
-@WebServlet("/addBoard")
-public class AddBoardServlet extends HttpServlet {
+@WebServlet("/boardDelete")
+public class BoardDeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -22,18 +22,16 @@ public class AddBoardServlet extends HttpServlet {
 		String nextPage = null;
 		String mesg = null;
 		if(dto != null) {
-			String title = request.getParameter("title");
-			String boardcontent = request.getParameter("boardcontent");
-			String name = dto.getName();
-			int id = dto.getId();
+			String boardidStr = request.getParameter("boardid");
+			int boardid = Integer.parseInt(boardidStr);
 			
 			BoardService service = new BoardServiceImpl();
-			int n = service.addBoard(title, boardcontent, name, id);
+			int n = service.boardDelete(boardid);
 			
 			if(n == 0) {
-				mesg = "게시글 작성 실패";
+				mesg = "게시글 삭제 실패";
 			}else {
-				mesg = "게시글 작성 완료";
+				mesg = "게시글 삭제 완료";
 			}
 			request.setAttribute("mesg", mesg);
 			nextPage = "board/boardAlert.jsp";

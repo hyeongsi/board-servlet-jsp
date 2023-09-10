@@ -9,8 +9,8 @@ import com.dto.BoardDTO;
 import com.dto.PageDTO;
 
 public class BoardDAO {
-	public int addBoard(SqlSession session, BoardDTO dto) {
-		return session.update("BoardMapper.addBoard", dto);
+	public int boardAdd(SqlSession session, BoardDTO dto) {
+		return session.update("BoardMapper.boardAdd", dto);
 	}
 	
 	public PageDTO list(SqlSession session, int curPage) {
@@ -36,7 +36,11 @@ public class BoardDAO {
 		return session.update("BoardMapper.increaseViewcnt", boardid);
 	}
 	
-	public int updateBoard(SqlSession session, BoardDTO dto) {
-		return session.update("BoardMapper.updateBoard", dto);
+	public int boardUpdate(SqlSession session, BoardDTO dto) {
+		return session.update("BoardMapper.boardUpdate", dto);
+	}
+	
+	public int boardDelete(SqlSession session, int boardid) {
+		return session.delete("BoardMapper.boardDelete", boardid);
 	}
 }

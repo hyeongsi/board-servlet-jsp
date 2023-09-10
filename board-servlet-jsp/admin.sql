@@ -20,6 +20,7 @@ CREATE TABLE servletboard.member (
 select * from servletboard.member;
 
 /* 게시판 테이블 생성 */
+DROP SEQUENCE servletboard.board_seq;
 CREATE SEQUENCE servletboard.board_seq;
 
 DROP TABLE servletboard.board;
