@@ -7,7 +7,7 @@
 	<c:choose>
 		<c:when test="${not empty login}">
 			<div class="col-12 mb-3 text-end">
-				<a href="boardWriteUI" class="btn btn-outline-success rounded-4 fw-bold" type="button">글 작성</a>
+				<a href="postCreationUI" class="btn btn-outline-success rounded-4 fw-bold" type="button">글 작성</a>
 			</div>
 		</c:when>
 	</c:choose>
@@ -23,7 +23,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="dto" items="${pageDTO.list}">
-				<tr style="cursor: pointer" onclick="location.href='boardDetailUI?boardid=${dto.boardid}'">
+				<tr style="cursor: pointer" onclick="location.href='postDetailUI?boardid=${dto.boardid}'">
 					<td><c:out value="${dto.boardid}" /></td>
 					<td><c:out value="${dto.title}" /></td>
 					<td><c:out value="${dto.name}" /></td>

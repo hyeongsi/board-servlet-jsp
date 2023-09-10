@@ -8,37 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.BoardDTO;
 import com.dto.MemberDTO;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
-@WebServlet("/boardAdd")
-public class BoardAddServlet extends HttpServlet {
+@WebServlet("/postDetailUI")
+public class PostDetailUIServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+
+		final String boardidStr = request.getParameter("boardid");
+		final int boardid = Integer.parseInt(boardidStr);
+		
+		// 게시글 상세내용 읽어오기
+		final BoardService service = new BoardServiceImpl();
+		final BoardDTO boardDTO = service.getPostDetail(boardid);
 		
 		String nextPage = null;
-		String mesg = null;
-		if(dto != null) {
-			String title = request.getParameter("title");
-			String boardcontent = request.getParameter("boardcontent");
-			String name = dto.getName();
-			int id = dto.getId();
+		if(boardDTO != null) {
+			// 조회수 증가
+			service.increaseViewcnt(boardid);
 			
-			BoardService service = new BoardServiceImpl();
-			int n = service.boardAdd(title, boardcontent, name, id);
-			
-			if(n == 0) {
-				mesg = "게시글 작성 실패";
-			}else {
-				mesg = "게시글 작성 완료";
-			}
-			request.setAttribute("mesg", mesg);
+			request.setAttribute("boardDTO", boardDTO);
+			nextPage = "postDetail.jsp";
+		}else {
+			request.setAttribute("mesg", "게시글이 존재하지 않습니다.");
 			nextPage = "board/boardAlert.jsp";
-		}else {			
-			nextPage = "member/needLogin.jsp";
 		}
 		
 		request.getRequestDispatcher(nextPage).forward(request, response);

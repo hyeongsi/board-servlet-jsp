@@ -12,7 +12,7 @@ public class MySqlSessionFactory {
 	static SqlSessionFactory sqlSessionFactory = null;
 	
 	static {
-		String resource = "com/config/Configuration.xml";
+		final String resource = "com/config/Configuration.xml";
 		InputStream inputStream = null;
 		
 		try {
@@ -23,7 +23,7 @@ public class MySqlSessionFactory {
 	}
 	
 	public static SqlSession getSession() {
-		SqlSession session = sqlSessionFactory.openSession();
+		final SqlSession session = sqlSessionFactory.openSession();
 		return session;
 	}
 }

@@ -12,23 +12,22 @@ import com.dto.MemberDTO;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
-@WebServlet("/boardDelete")
-public class BoardDeleteServlet extends HttpServlet {
+@WebServlet("/postDeletion")
+public class PostDeletionServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		final HttpSession session = request.getSession();
+		final MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		
 		String nextPage = null;
 		String mesg = null;
 		if(dto != null) {
-			String boardidStr = request.getParameter("boardid");
-			int boardid = Integer.parseInt(boardidStr);
+			final int boardid = Integer.parseInt(request.getParameter("boardid"));
 			
-			BoardService service = new BoardServiceImpl();
-			int n = service.boardDelete(boardid);
+			final BoardService service = new BoardServiceImpl();
+			final int result = service.deletePost(boardid);
 			
-			if(n == 0) {
+			if(result == 0) {
 				mesg = "게시글 삭제 실패";
 			}else {
 				mesg = "게시글 삭제 완료";

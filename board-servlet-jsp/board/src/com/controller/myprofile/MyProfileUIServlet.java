@@ -15,8 +15,8 @@ import com.dto.MemberDTO;
 public class MyProfileUIServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		final HttpSession session = request.getSession();
+		final MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		
 		String nextPage = null;
 		if(dto != null) {

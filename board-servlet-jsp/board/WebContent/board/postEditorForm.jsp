@@ -4,7 +4,7 @@
 		<h1 class="fw-bold">글 수정</h1>
 	</div>
 
-	<form action="boardEdit" method="post" class="row g-3 w-75 m-auto justify-content-center">
+	<form action="postEditor" method="post" class="row g-3 w-75 m-auto justify-content-center">
 		<div class="col-12 col-xl-10 text-end">
 			<button class="btn btn-danger rounded-4">글 삭제</button>
 		</div>

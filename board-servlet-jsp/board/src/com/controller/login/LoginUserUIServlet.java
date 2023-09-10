@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/loginMemberUI")
-public class LoginMemberUIServlet extends HttpServlet {    
+@WebServlet("/loginUserUI")
+public class LoginUserUIServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("loginMember.jsp").forward(request, response);
+		request.getRequestDispatcher("loginUser.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

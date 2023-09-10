@@ -9,24 +9,25 @@ import com.dto.PageDTO;
 
 public class BoardServiceImpl implements BoardService {
 
-	public int boardAdd(String title, String boardcontent, String name, int id) {
+	public int uploadPost(final String title, final String boardcontent, final String name, final int id) {
 		final int titleByte = 100;
 		final int boardcontentByte = 4000;
 		int n = 0;
 		
-		SqlSession session = MySqlSessionFactory.getSession();
+		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
+			// 제목, 내용이 지정된 범위를 벗어나지 않았다면 동작
 			if(title.getBytes().length <= titleByte && 
 					boardcontent.getBytes().length <= boardcontentByte) {
 
-				BoardDTO dto = new BoardDTO();
+				final BoardDTO dto = new BoardDTO();
 				dto.setTitle(title);
 				dto.setBoardcontent(boardcontent);
 				dto.setName(name);
 				dto.setId(id);
 				
-				BoardDAO boardDAO = new BoardDAO();
-				n = boardDAO.boardAdd(session, dto);
+				final BoardDAO boardDAO = new BoardDAO();
+				n = boardDAO.uploadPost(session, dto);
 				
 				session.commit();
 			}else {
@@ -42,12 +43,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public PageDTO list(int curPage) {
-		SqlSession session = MySqlSessionFactory.getSession();
+	public PageDTO list(final int curPage) {
+		final SqlSession session = MySqlSessionFactory.getSession();
 		PageDTO pageDTO = null;
 		
 		try {	
-			BoardDAO boardDAO = new BoardDAO();
+			final BoardDAO boardDAO = new BoardDAO();
 			pageDTO = boardDAO.list(session, curPage);
 			
 		} catch (Exception e) {
@@ -60,13 +61,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDTO boardDetail(int boardid) {
-		SqlSession session = MySqlSessionFactory.getSession();
+	public BoardDTO getPostDetail(final int boardid) {
+		final SqlSession session = MySqlSessionFactory.getSession();
 		BoardDTO dto = null;
 		
 		try {	
-			BoardDAO boardDAO = new BoardDAO();
-			dto = boardDAO.boardDetail(session, boardid);
+			final BoardDAO boardDAO = new BoardDAO();
+			dto = boardDAO.getPostDetail(session, boardid);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,12 +79,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int increaseViewcnt(int boardid) {
-		SqlSession session = MySqlSessionFactory.getSession();
+	public int increaseViewcnt(final int boardid) {
+		final SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		
 		try {	
-			BoardDAO boardDAO = new BoardDAO();
+			final BoardDAO boardDAO = new BoardDAO();
 			n = boardDAO.increaseViewcnt(session, boardid);
 			
 			session.commit();
@@ -97,18 +98,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardUpdate(int boardid, String title, String boardcontent) {
-		SqlSession session = MySqlSessionFactory.getSession();
+	public int updatePost(final int boardid, final String title, final String boardcontent) {
+		final SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		
 		try {	
-			BoardDTO dto = new BoardDTO();
+			final BoardDTO dto = new BoardDTO();
 			dto.setBoardid(boardid);
 			dto.setTitle(title);
 			dto.setBoardcontent(boardcontent);
 			
-			BoardDAO boardDAO = new BoardDAO();
-			n = boardDAO.boardUpdate(session, dto);
+			final BoardDAO boardDAO = new BoardDAO();
+			n = boardDAO.updatePost(session, dto);
 			
 			session.commit();
 		} catch (Exception e) {
@@ -121,13 +122,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardDelete(int boardid) {
-		SqlSession session = MySqlSessionFactory.getSession();
+	public int deletePost(final int boardid) {
+		final SqlSession session = MySqlSessionFactory.getSession();
 		int n = 0;
 		
 		try {
-			BoardDAO boardDAO = new BoardDAO();
-			n = boardDAO.boardDelete(session, boardid);
+			final BoardDAO boardDAO = new BoardDAO();
+			n = boardDAO.deletePost(session, boardid);
 			
 			session.commit();
 		} catch (Exception e) {

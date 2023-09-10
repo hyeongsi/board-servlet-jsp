@@ -25,6 +25,6 @@
 		<script src="board/js/boardConfirm.js"></script>
 	</head>
 	<body>
-		<%@ include file="common/navBarForm.jsp"%> <%@ include file="board/boardEditForm.jsp"%>
+		<%@ include file="common/navBarForm.jsp"%> <%@ include file="board/postEditorForm.jsp"%>
 	</body>
 </html>

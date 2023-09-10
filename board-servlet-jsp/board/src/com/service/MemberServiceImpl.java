@@ -1,23 +1,22 @@
 package com.service;
 
-import java.util.HashMap;
-
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.MemberDAO;
+import com.dto.LoginDTO;
 import com.dto.MemberDTO;
 
 public class MemberServiceImpl implements MemberService {
 
 	@Override
-	public MemberDTO useridCheck(String userid) {
+	public MemberDTO getSameUseridMember(final String userid) {
 		MemberDTO dto = null;
 		
-		SqlSession session = MySqlSessionFactory.getSession();
+		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			MemberDAO dao = new MemberDAO();
-			dto = dao.useridCheck(session, userid);
+			final MemberDAO dao = new MemberDAO();
+			dto = dao.getSameUseridMember(session, userid);
 		}finally {
 			session.close();
 		}
@@ -25,13 +24,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO nameCheck(String name) {
+	public MemberDTO getSameNameMember(final String name) {
 		MemberDTO dto = null;
 		
-		SqlSession session = MySqlSessionFactory.getSession();
+		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			MemberDAO dao = new MemberDAO();
-			dto = dao.nameCheck(session, name);
+			final MemberDAO dao = new MemberDAO();
+			dto = dao.getSameNameMember(session, name);
 		}finally {
 			session.close();
 		}
@@ -39,12 +38,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int registerMember(MemberDTO dto) {
+	public int registerMember(final MemberDTO dto) {
 		int n = 0;
 		
-		SqlSession session = MySqlSessionFactory.getSession();
+		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			MemberDAO dao = new MemberDAO();
+			final MemberDAO dao = new MemberDAO();
 			n = dao.registerMember(session, dto);
 			session.commit();
 		}finally {
@@ -54,13 +53,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO loginMember(HashMap<String, String> loginMap) {
+	public MemberDTO getLoginUserInfo(final LoginDTO loginDTO) {
 		MemberDTO dto = null;
 		
-		SqlSession session = MySqlSessionFactory.getSession();
+		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			MemberDAO dao = new MemberDAO();
-			dto = dao.loginMember(session, loginMap);
+			final MemberDAO dao = new MemberDAO();
+			dto = dao.getLoginUserInfo(session, loginDTO);
 		}finally {
 			session.close();
 		}
@@ -68,12 +67,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String userid) {
+	public int deleteMember(final String userid) {
 		int n = 0;
 		
-		SqlSession session = MySqlSessionFactory.getSession();
+		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			MemberDAO dao = new MemberDAO();
+			final MemberDAO dao = new MemberDAO();
 			n = dao.deleteMember(session, userid);
 			session.commit();
 		}finally {
@@ -83,13 +82,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int editMember(MemberDTO dto) {
+	public int updateMember(final MemberDTO dto) {
 		int n = 0;
 		
-		SqlSession session = MySqlSessionFactory.getSession();
+		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			MemberDAO dao = new MemberDAO();
-			n = dao.editMember(session, dto);
+			final MemberDAO dao = new MemberDAO();
+			n = dao.updateMember(session, dto);
 			session.commit();
 		}finally {
 			session.close();

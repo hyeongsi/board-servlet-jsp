@@ -5,10 +5,16 @@ import com.dto.PageDTO;
 
 public interface BoardService {
 	
-	public int boardAdd(String title, String boardcontent, String name, int id);
-	public PageDTO list(int curPage);
-	public BoardDTO boardDetail(int boardid); 
-	public int increaseViewcnt(int boardid);
-	public int boardUpdate(int boardid, String title, String boardcontent);
-	public int boardDelete(int boardid);
+	// 게시글 추가
+	public int uploadPost(final String title, final String boardcontent, final String name, final int id);
+	// 전체 게시글 리스트 획득
+	public PageDTO list(final int curPage);
+	// 게시글 상세내용 획득
+	public BoardDTO getPostDetail(final int boardid); 
+	// 조회수 증가
+	public int increaseViewcnt(final int boardid);
+	// 게시글 변경
+	public int updatePost(final int boardid, final String title, final String boardcontent);
+	// 게시글 삭제
+	public int deletePost(final int boardid);
 }

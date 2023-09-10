@@ -5,7 +5,7 @@
 		<h1 class="fw-bold">회원가입</h1>
 	</div>
 
-	<form action="registerMember" method="post" class="row g-3 w-75 m-auto justify-content-center" id="registerForm">
+	<form action="memberRegistration" method="post" class="row g-3 w-75 m-auto justify-content-center" id="registerForm">
 		<div class="col-12 col-xl-10">
 			<div class="input-group gap-3 align-items-center">
 				<div class="form-floating">

@@ -4,31 +4,32 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.LoginDTO;
 import com.dto.MemberDTO;
 
 public class MemberDAO {
 	
-	public MemberDTO useridCheck(SqlSession session, String userid) {
-		return session.selectOne("MemberMapper.useridCheck", userid);
+	public MemberDTO getSameUseridMember(final SqlSession session, final String userid) {
+		return session.selectOne("MemberMapper.getSameUseridMember", userid);
 	}
 	
-	public MemberDTO nameCheck(SqlSession session, String name) {
-		return session.selectOne("MemberMapper.nameCheck", name);
+	public MemberDTO getSameNameMember(final SqlSession session, final String name) {
+		return session.selectOne("MemberMapper.getSameNameMember", name);
 	}
 	
-	public int registerMember(SqlSession session, MemberDTO dto) {
+	public int registerMember(final SqlSession session, final MemberDTO dto) {
 		return session.insert("MemberMapper.registerMember", dto);
 	}
 	
-	public MemberDTO loginMember(SqlSession session, HashMap<String, String> loginMap) {
-		return session.selectOne("MemberMapper.loginMember", loginMap);
+	public MemberDTO getLoginUserInfo(final SqlSession session, final LoginDTO loginDTO) {
+		return session.selectOne("MemberMapper.getLoginUserInfo", loginDTO);
 	}
 	
-	public int deleteMember(SqlSession session, String userid) {
+	public int deleteMember(final SqlSession session, final String userid) {
 		return session.delete("MemberMapper.deleteMember", userid);
 	}
 	
-	public int editMember(SqlSession session, MemberDTO dto) {
-		return session.update("MemberMapper.editMember", dto);
+	public int updateMember(final SqlSession session, final MemberDTO dto) {
+		return session.update("MemberMapper.updateMember", dto);
 	}
 }

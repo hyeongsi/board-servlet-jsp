@@ -17,13 +17,13 @@ import com.service.MemberServiceImpl;
 public class UserIdCheckServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userid = request.getParameter("userid");
+		final String userid = request.getParameter("userid");
 		
-		MemberService service = new MemberServiceImpl();
-		MemberDTO dto = service.useridCheck(userid);
+		final MemberService service = new MemberServiceImpl();
+		final MemberDTO dto = service.getSameUseridMember(userid);
 		
 		response.setContentType("text/plain;charset=utf-8");
-		PrintWriter out = response.getWriter();
+		final PrintWriter out = response.getWriter();
 		
 		if(dto == null) {
 			out.print("success");

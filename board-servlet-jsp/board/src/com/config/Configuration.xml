@@ -9,6 +9,7 @@
   <typeAliases>
     <typeAlias alias="MemberDTO" type="com.dto.MemberDTO"/>
     <typeAlias alias="BoardDTO" type="com.dto.BoardDTO"/>
+    <typeAlias alias="LoginDTO" type="com.dto.LoginDTO"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">

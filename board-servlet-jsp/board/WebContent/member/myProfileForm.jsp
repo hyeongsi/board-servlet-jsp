@@ -4,13 +4,13 @@
 		<h1 class="fw-bold">내 정보</h1>
 	</div>
 
-	<form action="deleteMember" method="post" class="row g-3 w-75 m-auto justify-content-center" id="deleteMemberForm">
+	<form action="memberDeletion" method="post" class="row g-3 w-75 m-auto justify-content-center" id="deleteMemberForm">
 		<div class="col-12 col-xl-10 text-end">
 			<input type="hidden" name="userid" value="${login.userid}" />
 			<button class="btn btn-danger rounded-4" type="button" id="deleteMemberBtn">회원 탈퇴</button>
 		</div>
 	</form>
-	<form action="editMember" method="post" class="row g-3 w-75 m-auto justify-content-center" id="editMemberForm">
+	<form action="memberEditor" method="post" class="row g-3 w-75 m-auto justify-content-center" id="editMemberForm">
 		<div class="col-12 col-xl-10">
 			<div class="form-floating">
 				<input type="text" class="form-control rounded-4" value="<c:out value='${login.userid}' />" placeholder="아이디" maxlength="12" disabled />

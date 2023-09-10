@@ -1,8 +1,6 @@
-package com.controller;
+package com.controller.register;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,23 +11,23 @@ import com.dto.MemberDTO;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 
-@WebServlet("/nameCheck")
-public class NameCheckServlet extends HttpServlet {
+@WebServlet("/memberRegistration")
+public class MemberRegistrationServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		final String userid = request.getParameter("userid");
+		final String pw = request.getParameter("pw");
 		final String name = request.getParameter("name");
 		
+		final MemberDTO dto = new MemberDTO(userid, pw, name);
+		
 		final MemberService service = new MemberServiceImpl();
-		final MemberDTO dto = service.getSameNameMember(name);
+		final int result = service.registerMember(dto);
 		
-		response.setContentType("text/plain;charset=utf-8");
-		final PrintWriter out = response.getWriter();
+		if(result == 0) {
+		}else {}
 		
-		if(dto == null) {
-			out.print("success");
-		}else {
-			out.print("fail");
-		}
+		request.getRequestDispatcher("registerSuccess.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
