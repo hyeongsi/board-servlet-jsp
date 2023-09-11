@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.enums.SitePath;
 import com.dto.PageDTO;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
@@ -16,22 +17,22 @@ import com.service.BoardServiceImpl;
 public class BoardUIServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String curPageStr = request.getParameter("curPage");
 		
 		int curPage = 1;
-		if(curPageStr != null) {
-			try {
-				curPage = Integer.parseInt(curPageStr);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		final String curPageStr = request.getParameter("curPage");
+		if(curPageStr != null)
+			curPage = Integer.parseInt(curPageStr);
 		
+		// 현재 페이지 기준의 게시글 리스트 얻기
 		final BoardService service = new BoardServiceImpl();
-		final PageDTO pageDTO = service.list(curPage);
+		final PageDTO pageDTO = service.getPosts(curPage);
 
-		request.setAttribute("pageDTO", pageDTO);
-		request.getRequestDispatcher("board.jsp").forward(request, response);
+		// 메인화면(게시글) 화면 이동
+		final String path = SitePath.BOARD.getPath();
+		if(pageDTO != null)
+			request.setAttribute("pageDTO", pageDTO);
+		
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

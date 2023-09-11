@@ -10,14 +10,13 @@
 		</div>
 		<div class="col-12 col-xl-10">
 			<div class="text-start">
-				<input type="hidden" name="boardid" value="<c:out value='${boardDTO.boardid}' />" />
+				<input type="hidden" name="boardid" value="<c:out value='${boardDTO.boardid}'/>" />
 				<textarea style="resize: none" class="form-control rounded-4" name="title" id="title" placeholder="제목" required><c:out value="${boardDTO.title}" /></textarea>
 			</div>
 		</div>
 		<div class="col-12 col-xl-10">
-			<textarea style="height: 16rem; resize: none" class="form-control rounded-4" name="boardcontent" id="boardcontent" placeholder="내용" required>
-				<c:out value="${boardDTO.boardcontent}" /></textarea
-			>
+			<textarea style="height: 16rem; resize: none" class="form-control rounded-4" name="boardcontent" id="boardcontent" placeholder="내용" required
+			><c:out value="${boardDTO.boardcontent}" /></textarea>
 		</div>
 		<div class="col-12 mt-5">
 			<button class="btn btn-primary rounded-4" type="submit">수정하기</button>

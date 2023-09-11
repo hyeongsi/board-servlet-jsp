@@ -43,13 +43,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public PageDTO list(final int curPage) {
+	public PageDTO getPosts(final int curPage) {
 		final SqlSession session = MySqlSessionFactory.getSession();
 		PageDTO pageDTO = null;
 		
 		try {	
 			final BoardDAO boardDAO = new BoardDAO();
-			pageDTO = boardDAO.list(session, curPage);
+			pageDTO = boardDAO.getPosts(session, curPage);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

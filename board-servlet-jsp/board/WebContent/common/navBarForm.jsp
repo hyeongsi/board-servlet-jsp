@@ -3,7 +3,7 @@
 <div class="container">
 	<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
 		<div class="col-md-3 mb-2 mb-md-0">
-			<a href="bulletinBoardUI" class="d-inline-flex link-body-emphasis text-decoration-none">
+			<a href="boardUI" class="d-inline-flex link-body-emphasis text-decoration-none">
 				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-browser-chrome" viewBox="0 0 16 16">
 					<path
 						fill-rule="evenodd"
@@ -14,14 +14,14 @@
 		</div>
 
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="bulletinBoardUI" class="nav-link px-2 link-secondary">홈</a></li>
+			<li><a href="boardUI" class="nav-link px-2 link-secondary">홈</a></li>
 		</ul>
 
 		<c:choose>
 			<c:when test="${empty login}">
 				<div class="col-md-3 text-end gap-3">
 					<a href="loginUserUI" class="btn btn-outline-primary">로그인</a>
-					<a href="registerMemberUI" class="btn btn-primary">회원가입</a>
+					<a href="memberRegistrationUI" class="btn btn-primary">회원가입</a>
 				</div>
 			</c:when>
 			<c:otherwise>

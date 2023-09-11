@@ -7,9 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.dto.MemberDTO;
+import com.common.AlertHref;
+import com.common.LoginUser;
+import com.common.enums.AlertMessage;
+import com.common.enums.SitePath;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
@@ -17,12 +19,14 @@ import com.service.BoardServiceImpl;
 public class PostEditorServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final HttpSession session = request.getSession();
-		final MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		final int FAIL_UPDATE = 0;
 		
+		boolean isLogin = LoginUser.isLogin(request);
+		
+		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
-		String mesg = null;
-		if(dto != null) {
+		
+		if(isLogin) {
 			final int boardid = Integer.parseInt(request.getParameter("boardid"));
 			final String title = request.getParameter("title");
 			final String boardcontent = request.getParameter("boardcontent");
@@ -30,15 +34,17 @@ public class PostEditorServlet extends HttpServlet {
 			final BoardService service = new BoardServiceImpl();
 			final int result = service.updatePost(boardid, title, boardcontent);
 			
-			if(result == 0) {
-				mesg = "게시글 수정 실패";
-			}else {
-				mesg = "게시글 수정 완료";
+			// 수정 실패
+			if(result == FAIL_UPDATE) {
+				nextPage = href.setAlertPath(AlertMessage.FAILED_UPDATE_POST, SitePath.BOARD_UI);
 			}
-			request.setAttribute("mesg", mesg);
-			nextPage = "board/boardAlert.jsp";
-		}else {			
-			nextPage = "member/needLogin.jsp";
+			// 수정 성공
+			else {
+				nextPage = href.setAlertPath(AlertMessage.SUCCESS_UPDATE_POST, SitePath.BOARD_UI);
+			}
+
+		}else {
+			nextPage = href.setNeedLoginPath();
 		}
 		
 		request.getRequestDispatcher(nextPage).forward(request, response);

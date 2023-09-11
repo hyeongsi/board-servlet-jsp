@@ -1,13 +1,17 @@
 package com.controller.board;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.common.AlertHref;
+import com.common.LoginUser;
+import com.common.enums.AlertMessage;
+import com.common.enums.SitePath;
 import com.dto.MemberDTO;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
@@ -16,29 +20,36 @@ import com.service.BoardServiceImpl;
 public class PostCreationServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final HttpSession session = request.getSession();
-		final MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		final int FAIL_UPLOAD = 0;
 		
+		boolean isLogin = LoginUser.isLogin(request);
+		
+		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
-		String mesg = null;
-		if(dto != null) {
+		
+		if(isLogin) {
+			final MemberDTO loginUserDTO = LoginUser.getLoginUserDTO(request);
+			
 			final String title = request.getParameter("title");
 			final String boardcontent = request.getParameter("boardcontent");
-			final String name = dto.getName();
-			final int id = dto.getId();
+			final String name = loginUserDTO.getName();
+			final int id = loginUserDTO.getId();
 			
 			final BoardService service = new BoardServiceImpl();
 			final int result = service.uploadPost(title, boardcontent, name, id);
 			
-			if(result == 0) {
-				mesg = "게시글 작성 실패";
-			}else {
-				mesg = "게시글 작성 완료";
+			if(result == FAIL_UPLOAD) {
+				// 업로드 실패 메시지, 글 작성 화면 이동 설정
+				nextPage = href.setAlertPath(AlertMessage.FAILED_UPLOAD_POST, 
+											SitePath.POST_CREATION_UI);
 			}
-			request.setAttribute("mesg", mesg);
-			nextPage = "board/boardAlert.jsp";
-		}else {			
-			nextPage = "member/needLogin.jsp";
+			else {
+				// 메인화면(게시글) 이동 설정
+				nextPage = SitePath.BOARD_UI.getPath();
+			}
+		}else {
+			// 로그인 필요 메시지, 로그인 화면 이동 설정
+			nextPage = href.setNeedLoginPath();
 		}
 		
 		request.getRequestDispatcher(nextPage).forward(request, response);

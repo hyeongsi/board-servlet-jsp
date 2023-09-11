@@ -1,29 +1,32 @@
 package com.controller.board;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.dto.MemberDTO;
-import com.service.BoardService;
-import com.service.BoardServiceImpl;
+import com.common.AlertHref;
+import com.common.LoginUser;
+import com.common.enums.SitePath;
 
 @WebServlet("/postCreationUI")
 public class PostCreationUIServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final HttpSession session = request.getSession();
-		final MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		
+		final boolean isLogin = LoginUser.isLogin(request);
+		
+		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
-		if(dto != null) {	
-			nextPage = "postCreation.jsp";
+		
+		if(isLogin) {	
+			nextPage = SitePath.POST_CREATION.getPath();
 		}else {			
-			nextPage = "member/needLogin.jsp";
+			// 로그인 필요 메시지, 로그인 화면 이동 설정
+			nextPage = href.setNeedLoginPath();
 		}
 		
 		request.getRequestDispatcher(nextPage).forward(request, response);

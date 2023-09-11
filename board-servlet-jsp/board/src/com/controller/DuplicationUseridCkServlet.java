@@ -13,14 +13,14 @@ import com.dto.MemberDTO;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 
-@WebServlet("/nameCheck")
-public class NameCheckServlet extends HttpServlet {
+@WebServlet("/duplicationUseridCk")
+public class DuplicationUseridCkServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String name = request.getParameter("name");
+		final String userid = request.getParameter("userid");
 		
 		final MemberService service = new MemberServiceImpl();
-		final MemberDTO dto = service.getSameNameMember(name);
+		final MemberDTO dto = service.getSameUseridMember(userid);
 		
 		response.setContentType("text/plain;charset=utf-8");
 		final PrintWriter out = response.getWriter();

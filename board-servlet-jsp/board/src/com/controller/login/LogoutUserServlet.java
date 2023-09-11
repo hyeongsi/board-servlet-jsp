@@ -9,21 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.common.AlertHref;
+import com.common.LoginUser;
+import com.common.enums.SitePath;
 import com.dto.MemberDTO;
 
 @WebServlet("/logoutUser")
 public class LogoutUserServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		final HttpSession session = request.getSession();
-		final MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		final boolean isLogin = LoginUser.isLogin(request);
 		
+		AlertHref href = new AlertHref(request);
 		String nextPage = null;
-		if(dto != null) {
-			nextPage = "boardUI";
+		
+		if(isLogin) {
+			nextPage = SitePath.BOARD_UI.getPath();
+			
+			final HttpSession session = request.getSession();
 			session.invalidate();  // 로그아웃
 		}else {			
-			nextPage = "member/needLogin.jsp";
+			nextPage = href.setNeedLoginPath();
 		}
 		
 		response.sendRedirect(nextPage);

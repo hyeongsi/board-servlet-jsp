@@ -63,7 +63,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: "GET",
-			url: "useridCheck",
+			url: "duplicationUseridCk",
 			dataType: "text",
 			data: {
 				userid: userid.val(),
@@ -89,7 +89,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: "GET",
-			url: "nameCheck",
+			url: "duplicationNameCk",
 			dataType: "text",
 			data: {
 				name: name.val(),

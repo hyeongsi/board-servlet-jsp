@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.common.AlertHref;
+import com.common.LoginUser;
+import com.common.enums.AlertMessage;
+import com.common.enums.SitePath;
 import com.dto.BoardDTO;
 import com.dto.MemberDTO;
 import com.service.BoardService;
@@ -18,24 +22,27 @@ import com.service.BoardServiceImpl;
 public class PostEditorUIServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final HttpSession session = request.getSession();
-		final MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		
+		final boolean isLogin = LoginUser.isLogin(request); 
+		
+		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
-		if(dto != null) {
+		
+		if(isLogin) {
 			final int boardid = Integer.parseInt(request.getParameter("boardid"));
 			
 			final BoardService service = new BoardServiceImpl();
 			final BoardDTO boardDTO = service.getPostDetail(boardid);
 			if(boardDTO != null) {
 				request.setAttribute("boardDTO", boardDTO);
-				nextPage = "postEditor.jsp";
+				nextPage = SitePath.POST_EDITOR.getPath();
 			}else {
-				request.setAttribute("mesg", "게시글이 존재하지 않습니다.");
-				nextPage = "boardAlert.jsp";
+				// 없는 게시글 메시지, 메인화면(게시글) 이동 설정
+				nextPage = href.setAlertPath(AlertMessage.NOT_EXIST_POST, SitePath.BOARD_UI);
 			}
-		}else {			
-			nextPage = "member/needLogin.jsp";
+		}else {		
+			// 로그인 필요 메시지, 로그인 화면 이동 설정
+			nextPage = href.setNeedLoginPath();
 		}
 		
 		request.getRequestDispatcher(nextPage).forward(request, response);

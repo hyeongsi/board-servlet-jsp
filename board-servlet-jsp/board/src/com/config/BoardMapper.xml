@@ -14,7 +14,7 @@
 		select * from dual
 	</update>
 
-	<select id="list" resultType="BoardDTO">
+	<select id="getPosts" resultType="BoardDTO">
 		select a.boardid, a.title, a.writetime, a.viewcnt, a.name, b.id
 		from board a
 		inner join board_writter b on a.boardid = b.boardid
