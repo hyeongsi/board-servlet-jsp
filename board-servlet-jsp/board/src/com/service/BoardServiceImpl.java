@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
@@ -43,13 +45,40 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public PageDTO getPosts(final int curPage) {
+	public PageDTO getPageInfo(final int curPage) {
 		final SqlSession session = MySqlSessionFactory.getSession();
 		PageDTO pageDTO = null;
 		
 		try {	
+			// 가져올 작성글의 첫 인덱스, 첫 인덱스부터 가져올 글의 개수 연산
+			pageDTO = new PageDTO();
+			pageDTO.setCurPage(curPage);
+			final int offset = (pageDTO.getCurPage() - 1) * pageDTO.getPerPage();
+			final int limit = pageDTO.getPerPage();
+			
+			// 현재 페이지의 작성글 리스트 획득
 			final BoardDAO boardDAO = new BoardDAO();
-			pageDTO = boardDAO.getPosts(session, curPage);
+			List<BoardDTO> list = boardDAO.getPosts(session, curPage, offset, limit);
+			pageDTO.setList(list);
+			
+			// 전체 작성글 개수 획득
+			final int totalCount = session.selectOne("BoardMapper.totalCount");
+			pageDTO.setTotalCount(totalCount);
+			
+			// 페이지네이션에 사용할 첫 번호
+			final int perPage = pageDTO.getPerPage();
+			final int startPage = ((curPage-1) / perPage) * perPage + 1;
+			pageDTO.setStartPage(startPage);
+			
+			// 페이지네이션에 사용할 마지막 번호
+			int endPage = ((curPage-1) / perPage) * perPage + perPage;
+			final int totalPage = (totalCount-1) / perPage + 1;
+			pageDTO.setTotalPage(totalPage);
+			
+			// 마지막 페이지번호 초과 제한
+			if(endPage >= totalPage)
+				endPage = totalPage;
+			pageDTO.setEndPage(endPage);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,10 +132,16 @@ public class BoardServiceImpl implements BoardService {
 		int n = 0;
 		
 		try {	
+			title.replace("\r", "");
+			boardcontent.replace("\r", "");
+			
 			final BoardDTO dto = new BoardDTO();
 			dto.setBoardid(boardid);
 			dto.setTitle(title);
 			dto.setBoardcontent(boardcontent);
+			
+			
+			
 			
 			final BoardDAO boardDAO = new BoardDAO();
 			n = boardDAO.updatePost(session, dto);

@@ -1,6 +1,7 @@
 package com.controller.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.common.enums.SitePath;
+import com.dto.BoardDTO;
 import com.dto.PageDTO;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
@@ -25,7 +27,7 @@ public class BoardUIServlet extends HttpServlet {
 		
 		// 현재 페이지 기준의 게시글 리스트 얻기
 		final BoardService service = new BoardServiceImpl();
-		final PageDTO pageDTO = service.getPosts(curPage);
+		final PageDTO pageDTO = service.getPageInfo(curPage);
 
 		// 메인화면(게시글) 화면 이동
 		final String path = SitePath.BOARD.getPath();

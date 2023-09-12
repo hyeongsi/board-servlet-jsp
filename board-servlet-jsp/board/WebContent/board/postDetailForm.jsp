@@ -17,7 +17,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
 		<div class="card mb-5">
 			<div class="card-body p-5">
 				<div class="card-title mb-5 fw-bold" style="font-size: 1.2rem">
-					<c:set var="CRLF" value="\r\n" />
+					<c:set var="CRLF" value="\n" />
 					<c:set var="titleData" value="${boardDTO.title}" />
 					<c:set var="titleWords" value="${fn:split(titleData, CRLF)}" />
 					<c:forEach items="${titleWords}" var="word">

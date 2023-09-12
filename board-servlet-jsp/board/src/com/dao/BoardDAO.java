@@ -13,19 +13,9 @@ public class BoardDAO {
 		return session.update("BoardMapper.uploadPost", dto);
 	}
 	
-	public PageDTO getPosts(final SqlSession session, final int curPage) {
-		final PageDTO pageDTO = new PageDTO();
-		pageDTO.setCurPage(curPage);
-		final int offset = (pageDTO.getCurPage() - 1) * pageDTO.getPerPage();
-		final int limit = pageDTO.getPerPage();
-		
-		List<BoardDTO> list = session.selectList("BoardMapper.getPosts", null, new RowBounds(offset, limit));
-		pageDTO.setList(list);
-		
-		final int totalCount = session.selectOne("BoardMapper.totalCount");
-		pageDTO.setTotalCount(totalCount);
-		
-		return pageDTO;
+	public List<BoardDTO> getPosts(final SqlSession session, 
+			final int curPage, final int offset, final int limit) {
+		return session.selectList("BoardMapper.getPosts", null, new RowBounds(offset, limit));
 	}
 	
 	public BoardDTO getPostDetail(final SqlSession session, final int boardid) {

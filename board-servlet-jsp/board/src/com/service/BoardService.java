@@ -8,7 +8,7 @@ public interface BoardService {
 	// 게시글 추가
 	public int uploadPost(final String title, final String boardcontent, final String name, final int id);
 	// 현재페이지의 게시글 획득
-	public PageDTO getPosts(final int curPage);
+	public PageDTO getPageInfo(final int curPage);
 	// 게시글 상세내용 획득
 	public BoardDTO getPostDetail(final int boardid); 
 	// 조회수 증가
