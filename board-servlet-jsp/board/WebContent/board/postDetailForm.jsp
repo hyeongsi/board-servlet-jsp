@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fn"
-uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <section class="container">
 	<div class="w-75 m-auto">
@@ -15,12 +16,10 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
 			</c:choose>
 		</div>
 		<div class="card mb-5">
-			<div class="card-body p-5">
-				<div class="card-title mb-5 fw-bold" style="font-size: 1.2rem">
-					<c:set var="CRLF" value="\n" />
-					<c:set var="titleData" value="${boardDTO.title}" />
-					<c:set var="titleWords" value="${fn:split(titleData, CRLF)}" />
-					<c:forEach items="${titleWords}" var="word">
+			<div class="card-body p-3">
+				<div class="card-title mb-5 fw-bold" style="font-size: 1.2rem">					
+					<% pageContext.setAttribute("newLineChar", "\n"); %>
+					<c:forEach var="word" items="${fn:split(boardDTO.title, newLineChar)}">
 						<p style="white-space: pre-wrap"><c:out value="${word}" /></p>
 					</c:forEach>
 				</div>
@@ -32,8 +31,9 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
 					</div>
 					<hr />
 					<div class="card-text">
+						<% pageContext.setAttribute("newLineChar", "\n"); %>
 						<c:set var="boardData" value="${boardDTO.boardcontent}" />
-						<c:set var="contentWords" value="${fn:split(boardData, CRLF)}" />
+						<c:set var="contentWords" value="${fn:split(boardData, newLineChar)}" />
 						<c:forEach items="${contentWords}" var="word">
 							<p style="white-space: pre-wrap"><c:out value="${word}" /></p>
 						</c:forEach>
