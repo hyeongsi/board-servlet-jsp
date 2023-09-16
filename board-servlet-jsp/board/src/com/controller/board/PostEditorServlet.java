@@ -2,6 +2,7 @@ package com.controller.board;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,35 +19,41 @@ import com.service.BoardServiceImpl;
 @WebServlet("/postEditor")
 public class PostEditorServlet extends HttpServlet {
 
+	private final static int FAIL_UPDATE = 0;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final int FAIL_UPDATE = 0;
-		
 		boolean isLogin = LoginUser.isLogin(request);
 		
 		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
 		
-		if(isLogin) {
-			final int boardid = Integer.parseInt(request.getParameter("boardid"));
-			final String title = request.getParameter("title");
-			final String boardcontent = request.getParameter("boardcontent");
+		if(!isLogin) {
+			nextPage = href.setNeedLoginPath();
+			request.getRequestDispatcher(nextPage).forward(request, response);
+			return;
+		}
+			
+		final int boardid = Integer.parseInt(request.getParameter("boardid"));
+		final String title = request.getParameter("title");
+		final String boardcontent = request.getParameter("boardcontent");
+		
+		int result = FAIL_UPDATE;
+		// overflow가 아니라면 update 수행
+		if(!(BoardService.isOverflowTitle(title) ||
+				BoardService.isOverflowContent(boardcontent))) {
 			
 			final BoardService service = new BoardServiceImpl();
-			final int result = service.updatePost(boardid, title, boardcontent);
-			
-			// 수정 실패
-			if(result == FAIL_UPDATE) {
-				nextPage = href.setAlertPath(AlertMessage.FAILED_UPDATE_POST, SitePath.BOARD_UI);
-			}
-			// 수정 성공
-			else {
-				nextPage = href.setAlertPath(AlertMessage.SUCCESS_UPDATE_POST, SitePath.BOARD_UI);
-			}
-
-		}else {
-			nextPage = href.setNeedLoginPath();
+			result = service.updatePost(boardid, title, boardcontent);
 		}
 		
+		// 수정 실패
+		if(result == FAIL_UPDATE) {
+			nextPage = href.setAlertPath(AlertMessage.FAILED_UPDATE_POST, SitePath.BOARD_UI);
+		}
+		// 수정 성공
+		else {
+			nextPage = href.setAlertPath(AlertMessage.SUCCESS_UPDATE_POST, SitePath.BOARD_UI);
+		}
 		request.getRequestDispatcher(nextPage).forward(request, response);
 	}
 

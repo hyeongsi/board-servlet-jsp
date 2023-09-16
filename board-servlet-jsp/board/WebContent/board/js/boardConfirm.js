@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	$("#title").on("keydown keypress keyup change", function () {
-		fn_checkByte(this, 100);
+		fn_checkByte(this, 200);
 	});
 
 	$("#boardcontent").on("keydown keypress keyup change", function () {

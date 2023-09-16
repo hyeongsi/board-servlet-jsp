@@ -2,6 +2,7 @@ package com.controller.board;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,37 +20,45 @@ import com.service.BoardServiceImpl;
 @WebServlet("/postCreation")
 public class PostCreationServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final int FAIL_UPLOAD = 0;
-		
+	private final static int FAIL_UPLOAD = 0;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		boolean isLogin = LoginUser.isLogin(request);
 		
 		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
 		
-		if(isLogin) {
-			final MemberDTO loginUserDTO = LoginUser.getLoginUserDTO(request);
-			
-			final String title = request.getParameter("title");
-			final String boardcontent = request.getParameter("boardcontent");
-			final String name = loginUserDTO.getName();
-			final int id = loginUserDTO.getId();
-			
-			final BoardService service = new BoardServiceImpl();
-			final int result = service.uploadPost(title, boardcontent, name, id);
-			
-			if(result == FAIL_UPLOAD) {
-				// 업로드 실패 메시지, 글 작성 화면 이동 설정
-				nextPage = href.setAlertPath(AlertMessage.FAILED_UPLOAD_POST, 
-											SitePath.POST_CREATION_UI);
-			}
-			else {
-				// 메인화면(게시글) 이동 설정
-				nextPage = SitePath.BOARD_UI.getPath();
-			}
-		}else {
+		if(!isLogin) {
 			// 로그인 필요 메시지, 로그인 화면 이동 설정
 			nextPage = href.setNeedLoginPath();
+			request.getRequestDispatcher(nextPage).forward(request, response);
+			return;
+		}
+		
+		final MemberDTO loginUserDTO = LoginUser.getLoginUserDTO(request);
+		
+		final String title = request.getParameter("title");
+		final String boardcontent = request.getParameter("boardcontent");
+		final String name = loginUserDTO.getName();
+		final int id = loginUserDTO.getId();
+
+		int result = FAIL_UPLOAD;
+		// overflow가 아니라면 upload 수행
+		if(!(BoardService.isOverflowTitle(title) ||
+				BoardService.isOverflowContent(boardcontent))) {
+			
+			final BoardService service = new BoardServiceImpl();
+			result = service.uploadPost(title, boardcontent, name, id);
+		}
+		
+		if(result == FAIL_UPLOAD) {
+			// 업로드 실패 메시지, 글 작성 화면 이동 설정
+			nextPage = href.setAlertPath(AlertMessage.FAILED_UPLOAD_POST, 
+										SitePath.POST_CREATION_UI);
+		}
+		else {
+			// 메인화면(게시글) 이동 설정
+			nextPage = SitePath.BOARD_UI.getPath();
 		}
 		
 		request.getRequestDispatcher(nextPage).forward(request, response);

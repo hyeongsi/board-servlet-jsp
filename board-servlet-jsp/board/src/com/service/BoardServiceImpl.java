@@ -12,36 +12,20 @@ import com.dto.PageDTO;
 public class BoardServiceImpl implements BoardService {
 
 	public int uploadPost(final String title, final String boardcontent, final String name, final int id) {
-		final int titleByte = 100;
-		final int boardcontentByte = 4000;
 		int n = 0;
 		
 		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
-			// 제목, 내용이 지정된 범위를 벗어나지 않았다면 동작
-			System.out.println("title length: " + title.getBytes().length);
-			System.out.println("content length: " + boardcontent.getBytes().length);
+			final BoardDTO dto = new BoardDTO();
+			dto.setTitle(title);
+			dto.setBoardcontent(boardcontent);
+			dto.setName(name);
+			dto.setId(id);
 			
-			if(title.getBytes().length <= titleByte && 
-					boardcontent.getBytes().length <= boardcontentByte) {
-				
-				String replaceTitle = title.replaceAll("(\\r\\n|\\r|\\n\\r)", "\\n");
-				String replaceContent = boardcontent.replaceAll("(\\r\\n|\\r|\\n\\r)", "\\n");
-				
-				final BoardDTO dto = new BoardDTO();
-				dto.setTitle(replaceTitle);
-				dto.setBoardcontent(replaceContent);
-				dto.setName(name);
-				dto.setId(id);
-				
-				final BoardDAO boardDAO = new BoardDAO();
-				n = boardDAO.uploadPost(session, dto);
-				
-				session.commit();
-			}else {
-				return 0;
-			}
+			final BoardDAO boardDAO = new BoardDAO();
+			n = boardDAO.uploadPost(session, dto);
 			
+			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
