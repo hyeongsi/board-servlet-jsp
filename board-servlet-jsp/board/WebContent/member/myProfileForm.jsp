@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<section class="container text-center">
-	<div class="mt-5 py-3">
-		<h1 class="fw-bold">내 정보</h1>
-	</div>
 
+<div class="py-1 text-center">
+	<h5 class="fw-bold">내정보</h5>
+</div>
+
+<section class="container text-center mb-4">
 	<form action="memberDeletion" method="post" class="row g-3 w-75 m-auto justify-content-center" id="deleteMemberForm">
 		<div class="col-12 col-xl-10 text-end">
 			<input type="hidden" name="userid" value="${login.userid}" />
-			<button class="btn btn-danger rounded-4" type="button" id="deleteMemberBtn">회원 탈퇴</button>
+			<button class="btn btn-danger btn-sm rounded-4" type="button" id="deleteMemberBtn">회원 탈퇴</button>
 		</div>
 	</form>
 	<form action="memberEditor" method="post" class="row g-3 w-75 m-auto justify-content-center" id="editMemberForm">
@@ -41,9 +42,8 @@
 				<div class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
 			</div>
 		</div>
-		<div class="col-12 mt-5">
-			<button class="btn btn-primary rounded-4" type="submit">수정하기</button>
-			<button class="btn btn-outline-primary rounded-4" type="reset">취소하기</button>
+		<div class="col-12 mt-3">
+			<button class="btn btn-primary btn-sm rounded-4" type="submit">수정하기</button>
 		</div>
 	</form>
 </section>

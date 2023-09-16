@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<section class="container text-center">
-	<div class="mt-5 py-3">
-		<h1 class="fw-bold">회원가입</h1>
-	</div>
+<div class="py-1 text-center">
+	<h5 class="fw-bold">회원가입</h5>
+</div>
 
+<section class="container text-center">
 	<form action="memberRegistration" method="post" class="row g-3 w-75 m-auto justify-content-center" id="registerForm">
 		<div class="col-12 col-xl-10">
 			<div class="input-group gap-3 align-items-center">

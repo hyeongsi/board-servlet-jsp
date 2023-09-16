@@ -10,7 +10,7 @@ import com.dto.PageDTO;
 
 public class BoardDAO {
 	public int uploadPost(final SqlSession session, final BoardDTO dto) {
-		return session.update("BoardMapper.uploadPost", dto);
+		return session.insert("BoardMapper.uploadPost", dto);
 	}
 	
 	public List<BoardDTO> getPosts(final SqlSession session, 

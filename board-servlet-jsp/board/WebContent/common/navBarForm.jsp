@@ -20,15 +20,15 @@
 		<c:choose>
 			<c:when test="${empty login}">
 				<div class="col-md-3 text-end gap-3">
-					<a href="loginUserUI" class="btn btn-outline-primary">로그인</a>
-					<a href="memberRegistrationUI" class="btn btn-primary">회원가입</a>
+					<a href="loginUserUI" class="btn btn-sm btn-outline-primary rounded-4">로그인</a>
+					<a href="memberRegistrationUI" class="btn btn-sm btn-outline-primary rounded-4">회원가입</a>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="col-md-3 text-end gap-3">
-					<span class="fw-bold"><c:out value="${login.name} 님" /></span>
-					<a href="myProfileUI" class="btn btn-outline-primary">내정보</a>
-					<a href="logoutUser" class="btn btn-primary">로그아웃</a>
+				<div class="text-end">
+					<span class="fw-bold me-3"><c:out value="${login.name} 님" /></span>
+					<a href="myProfileUI" class="btn btn-sm btn-outline-primary rounded-4">내정보</a>
+					<a href="logoutUser" class="btn btn-sm btn-outline-primary rounded-4">로그아웃</a>
 				</div>
 			</c:otherwise>
 		</c:choose>

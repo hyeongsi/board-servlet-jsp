@@ -19,12 +19,18 @@ public class BoardServiceImpl implements BoardService {
 		final SqlSession session = MySqlSessionFactory.getSession();
 		try {
 			// 제목, 내용이 지정된 범위를 벗어나지 않았다면 동작
+			System.out.println("title length: " + title.getBytes().length);
+			System.out.println("content length: " + boardcontent.getBytes().length);
+			
 			if(title.getBytes().length <= titleByte && 
 					boardcontent.getBytes().length <= boardcontentByte) {
-
+				
+				String replaceTitle = title.replaceAll("(\\r\\n|\\r|\\n\\r)", "\\n");
+				String replaceContent = boardcontent.replaceAll("(\\r\\n|\\r|\\n\\r)", "\\n");
+				
 				final BoardDTO dto = new BoardDTO();
-				dto.setTitle(title);
-				dto.setBoardcontent(boardcontent);
+				dto.setTitle(replaceTitle);
+				dto.setBoardcontent(replaceContent);
 				dto.setName(name);
 				dto.setId(id);
 				
@@ -132,16 +138,13 @@ public class BoardServiceImpl implements BoardService {
 		int n = 0;
 		
 		try {	
-			title.replace("\r", "");
-			boardcontent.replace("\r", "");
+			final String replaceTitle = title.replaceAll("(\\r\\n|\\r|\\n\\r)", "\\n");
+			final String replaceContent = boardcontent.replaceAll("(\\r\\n|\\r|\\n\\r)", "\\n");
 			
 			final BoardDTO dto = new BoardDTO();
 			dto.setBoardid(boardid);
-			dto.setTitle(title);
-			dto.setBoardcontent(boardcontent);
-			
-			
-			
+			dto.setTitle(replaceTitle);
+			dto.setBoardcontent(replaceContent);
 			
 			final BoardDAO boardDAO = new BoardDAO();
 			n = boardDAO.updatePost(session, dto);

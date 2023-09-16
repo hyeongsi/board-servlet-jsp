@@ -5,14 +5,14 @@
 
 <mapper namespace="BoardMapper">
 	
-	<update id="uploadPost" parameterType="BoardDTO">
+	<insert id="uploadPost" parameterType="BoardDTO">
 		insert all
 	  	into board (boardid, title, boardcontent, name)
 	  		values (board_seq.nextval, #{title}, #{boardcontent}, #{name})
 	  	into board_writter (boardid, id)
 	  		values (board_seq.currval, #{id})
 		select * from dual
-	</update>
+	</insert>
 
 	<select id="getPosts" resultType="BoardDTO">
 		select a.boardid, a.title, a.writetime, a.viewcnt, a.name, b.id

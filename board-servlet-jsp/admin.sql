@@ -26,7 +26,7 @@ CREATE SEQUENCE servletboard.board_seq;
 DROP TABLE servletboard.board;
 CREATE TABLE servletboard.board (
   boardid number PRIMARY KEY,
-  title varchar2(100) not null,
+  title varchar2(200) not null,
   boardcontent varchar2(4000) not null,
   writetime date default sysdate,
   viewcnt number default 0,
