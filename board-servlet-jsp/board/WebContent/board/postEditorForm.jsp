@@ -25,7 +25,7 @@
 		</div>
 		
 		<div class="col-10">
-			<textarea name="boardcontent" id="boardcontent">${boardDTO.boardcontent}</textarea>
+			<textarea name="boardcontent" id="boardcontent"><c:out value="${boardDTO.boardcontent}" /></textarea>
 			<script>
 				ClassicEditor.create(document.querySelector("#boardcontent"), {
 					language: "ko",
