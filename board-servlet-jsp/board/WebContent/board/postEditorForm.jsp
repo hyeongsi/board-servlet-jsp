@@ -27,28 +27,54 @@
 		<div class="col-10">
 			<textarea name="boardcontent" id="boardcontent"><c:out value="${boardDTO.boardcontent}" /></textarea>
 			<script>
-				ClassicEditor.create(document.querySelector("#boardcontent"), {
-					language: "ko",
-					ckfinder: {
-						uploadUrl: "",
-					},
-				})
-					.then((editor) => {
-						console.log("Editor was initialized");
-					})
-					.catch((error) => {
-						console.error(error);
-					});
+			ClassicEditor
+            .create(document.querySelector('#boardcontent'), {
+            	language: "ko",
+            })
+            .then(editor => {
+            console.log('Editor was initialized', editor);
+
+            // 이미지 업로드 이벤트 처리
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return {
+                    upload: () => {
+                        return loader.file
+                            .then(file => {
+                                return new Promise((resolve, reject) => {
+                                    const formData = new FormData();
+                                    formData.append('file', file);
+
+                                    const xhr = new XMLHttpRequest();
+                                    xhr.open('POST', 'imageUploadServlet', true);
+                                    xhr.onload = () => {
+                                        if (xhr.status === 200) {
+                                            const response = JSON.parse(xhr.responseText);
+                                            if (response && response.url) {
+                                                resolve({ default: response.url });
+                                            } else {
+                                                reject('Image upload failed');
+                                            }
+                                        } else {
+                                            reject('Image upload failed');
+                                        }
+                                    };
+                                    xhr.send(formData);
+                                });
+                            });
+                    },
+                    abort: () => {
+                        // 업로드 취소 처리
+                    }
+                };
+            };
+        })
+        .catch(error => {
+            console.error('Error initializing CKEditor', error);
+        });
 			</script>
 		</div>
 		<div class="col-10 mt-3">
 			<button class="btn btn-outline-primary" type="submit">작성하기</button>
 		</div>
-		<script>
-		function test(){
-			console.log($("#editor").val());
-		}
-		</script>
-		<button class="btn btn-outline-primary" type="button" onclick="test()">테스트</button>
 	</form>
 </section>
