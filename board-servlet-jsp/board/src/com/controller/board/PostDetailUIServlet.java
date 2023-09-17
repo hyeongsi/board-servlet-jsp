@@ -12,6 +12,8 @@ import com.common.AlertHref;
 import com.common.enums.AlertMessage;
 import com.common.enums.SitePath;
 import com.dto.BoardDTO;
+import com.service.BoardSelectService;
+import com.service.BoardSelectServiceImpl;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
@@ -23,14 +25,15 @@ public class PostDetailUIServlet extends HttpServlet {
 		final int boardid = Integer.parseInt(request.getParameter("boardid"));
 		
 		// 게시글 상세내용 읽어오기
-		final BoardService service = new BoardServiceImpl();
-		final BoardDTO boardDTO = service.getPostDetail(boardid);
+		final BoardSelectService selectService = new BoardSelectServiceImpl();
+		final BoardDTO boardDTO = selectService.getPostDetail(boardid);
 		
 		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
 		
 		if(boardDTO != null) {
 			// 조회수 증가
+			final BoardService service = new BoardServiceImpl();
 			service.increaseViewcnt(boardid);
 			
 			request.setAttribute("boardDTO", boardDTO);

@@ -22,6 +22,8 @@
 			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
 			crossorigin="anonymous"
 		></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+		<script src="board/js/searchInit.js"></script>
 </head>
 <body>
 	<%@ include file="common/navBarForm.jsp"%>

@@ -1,3 +1,5 @@
+"use strict"
+
 $(document).ready(function () {
 	$("#title").on("keydown keypress keyup change", function () {
 		fn_checkByte(this, 200);

@@ -1,3 +1,5 @@
+"use strict"
+
 function fn_edit() {
 	$("#writterForm").attr("action", "postEditorUI");
 	$("#writterForm").submit();

@@ -4,6 +4,8 @@ public enum SitePath {
 	BOARD("board.jsp"),
 	BOARD_UI("boardUI"),
 	
+	POST_SEARCH("/postSearchServlet"),
+	
 	POST_DETAIL("postDetail.jsp"),
 	POST_DETAIL_UI("/postDetailUI"),
 	

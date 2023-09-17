@@ -8,7 +8,7 @@
 	<form action="memberDeletion" method="post" class="row g-3 w-75 m-auto justify-content-center" id="deleteMemberForm">
 		<div class="col-12 col-xl-10 text-end">
 			<input type="hidden" name="userid" value="${login.userid}" />
-			<button class="btn btn-danger btn-sm rounded-4" type="button" id="deleteMemberBtn">회원 탈퇴</button>
+			<button class="btn btn-outline-danger btn-sm rounded-3" type="button" id="deleteMemberBtn">회원 탈퇴</button>
 		</div>
 	</form>
 	<form action="memberEditor" method="post" class="row g-3 w-75 m-auto justify-content-center" id="editMemberForm">
@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div class="col-12 mt-3">
-			<button class="btn btn-primary btn-sm rounded-4" type="submit">수정하기</button>
+			<button class="btn btn-outline-primary btn-sm rounded-3" type="submit">수정하기</button>
 		</div>
 	</form>
 </section>

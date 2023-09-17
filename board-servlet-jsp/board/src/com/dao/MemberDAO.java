@@ -1,7 +1,5 @@
 package com.dao;
 
-import java.util.HashMap;
-
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.LoginDTO;

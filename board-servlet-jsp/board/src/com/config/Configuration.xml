@@ -25,5 +25,6 @@
   <mappers>
     <mapper resource="com/config/MemberMapper.xml"/>
     <mapper resource="com/config/BoardMapper.xml"/>
+    <mapper resource="com/config/BoardSelectMapper.xml"/>
   </mappers>
 </configuration>

@@ -1,3 +1,5 @@
+"use strict"
+
 $(document).ready(function () {
 	let useridCheck = /^[a-zA-z0-9]{2,12}$/;
 	let nameCheck = /^[a-zA-z0-9가-힣]{2,10}$/;

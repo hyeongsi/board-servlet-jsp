@@ -13,20 +13,6 @@
 	  		values (board_seq.currval, #{id})
 		select * from dual
 	</insert>
-
-	<select id="getPosts" resultType="BoardDTO">
-		select a.boardid, a.title, a.writetime, a.viewcnt, a.name, b.id
-		from board a
-		inner join board_writter b on a.boardid = b.boardid
-		order by a.boardid desc
-	</select>
-	
-	<select id="getPostDetail" parameterType="int" resultType="BoardDTO">
-		select a.boardid, a.title, a.writetime, a.boardcontent, a.viewcnt, a.name, b.id
-		from board a
-		inner join board_writter b on a.boardid = b.boardid
-		where a.boardid = #{boardid}
-	</select>
 	
 	<update id="increaseViewcnt" parameterType="int">
 		update board set viewcnt = viewcnt + 1

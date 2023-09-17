@@ -12,7 +12,7 @@
 					<input type="text" class="form-control rounded-4" name="userid" id="userid" placeholder="아이디" maxlength="12" /> <label for="userid">아이디</label>
 					<div class="invalid-feedback">아이디는 2~12자, 영문 대소문자, 숫자만 사용 가능합니다.</div>
 				</div>
-				<button type="button" class="btn btn-outline-primary rounded-4 h-25" id="idCkBtn">중복확인</button>
+				<button type="button" class="btn btn-outline-primary rounded-3 h-25" id="idCkBtn">중복확인</button>
 			</div>
 		</div>
 		<div class="col-12 col-xl-10">
@@ -21,7 +21,7 @@
 					<input type="text" class="form-control rounded-4" name="name" id="name" placeholder="이름" maxlength="10" /> <label for="name">이름</label>
 					<div class="invalid-feedback">닉네임은 2 ~10자, 특수문자를 제외한 한글,영문 대소문자, 숫자만 사용 가능합니다.</div>
 				</div>
-				<button type="button" class="btn btn-outline-primary rounded-4 h-25" id="nameCkBtn">중복확인</button>
+				<button type="button" class="btn btn-outline-primary rounded-3 h-25" id="nameCkBtn">중복확인</button>
 			</div>
 		</div>
 		<div class="col-md-6 col-xl-5">
@@ -39,8 +39,8 @@
 			</div>
 		</div>
 		<div class="col-12 mt-5">
-			<button class="btn btn-primary rounded-4" type="submit">가입하기</button>
-			<button class="btn btn-outline-primary rounded-4" type="reset">취소하기</button>
+			<button class="btn btn-outline-success rounded-3" type="submit">가입하기</button>
+			<button class="btn btn-outline-warning rounded-3" type="reset">취소하기</button>
 		</div>
 	</form>
 </section>

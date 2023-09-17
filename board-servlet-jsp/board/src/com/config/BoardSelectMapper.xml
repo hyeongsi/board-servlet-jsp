@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardSelectMapper">
+	
+	<!-- 게시글 리스트 가져오기 -->
+	<select id="getPosts" resultType="BoardDTO">
+		select a.boardid, a.title, a.writetime, a.viewcnt, a.name, b.id
+		from board a
+		inner join board_writter b on a.boardid = b.boardid
+		order by a.boardid desc
+	</select>
+	<select id="getTotalCount" resultType="int">
+		select count(*)
+		from board
+	</select>
+	
+	<!-- 게시글 상세 -->
+	<select id="getPostDetail" parameterType="int" resultType="BoardDTO">
+		select a.boardid, a.title, a.writetime, a.boardcontent, a.viewcnt, a.name, b.id
+		from board a
+		inner join board_writter b on a.boardid = b.boardid
+		where a.boardid = #{boardid}
+	</select>
+	
+	<!-- 제목 검색 게시글 리스트 가져오기 -->
+	<select id="getPostsAsTitle" resultType="BoardDTO" parameterType="String">
+		select a.boardid, a.title, a.writetime, a.viewcnt, a.name, b.id
+		from board a
+		inner join board_writter b on a.boardid = b.boardid
+		where a.title like '%'||#{value}||'%'
+		order by a.boardid desc
+	</select>
+	<select id="getSearchTitleTotalCount" resultType="int" parameterType="String">
+		select count(*)
+		from board
+		where title like '%'||#{value}||'%'
+	</select>
+	
+	<!-- 내용 검색 게시글 리스트 가져오기 -->
+	<select id="getPostsAsContent" resultType="BoardDTO" parameterType="String">
+		select a.boardid, a.title, a.writetime, a.viewcnt, a.name, b.id
+		from board a
+		inner join board_writter b on a.boardid = b.boardid
+		where a.boardcontent like '%'||#{search}||'%'
+		order by a.boardid desc
+	</select>
+	<select id="getSearchContentTotalCount" resultType="int" parameterType="String">
+		select count(*)
+		from board
+		where boardcontent like '%'||#{search}||'%'
+	</select>
+	
+	<!-- 제목+내용 검색 게시글 리스트 가져오기 -->
+	<select id="getPostsAsName" resultType="BoardDTO" parameterType="String">
+		select a.boardid, a.title, a.writetime, a.viewcnt, a.name, b.id
+		from board a
+		inner join board_writter b on a.boardid = b.boardid
+		where a.name like '%'||#{search}||'%'
+		order by a.boardid desc
+	</select>
+	<select id="getSearchNameTotalCount" resultType="int" parameterType="String">
+		select count(*)
+		from board
+		where name like '%'||#{search}||'%'
+	</select>
+	
+</mapper>

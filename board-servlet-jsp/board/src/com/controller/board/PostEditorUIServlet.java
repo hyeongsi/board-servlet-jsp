@@ -7,16 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.common.AlertHref;
 import com.common.LoginUser;
 import com.common.enums.AlertMessage;
 import com.common.enums.SitePath;
 import com.dto.BoardDTO;
-import com.dto.MemberDTO;
-import com.service.BoardService;
-import com.service.BoardServiceImpl;
+import com.service.BoardSelectService;
+import com.service.BoardSelectServiceImpl;
 
 @WebServlet("/postEditorUI")
 public class PostEditorUIServlet extends HttpServlet {
@@ -31,7 +29,7 @@ public class PostEditorUIServlet extends HttpServlet {
 		if(isLogin) {
 			final int boardid = Integer.parseInt(request.getParameter("boardid"));
 			
-			final BoardService service = new BoardServiceImpl();
+			final BoardSelectService service = new BoardSelectServiceImpl();
 			final BoardDTO boardDTO = service.getPostDetail(boardid);
 			if(boardDTO != null) {
 				request.setAttribute("boardDTO", boardDTO);

@@ -1,3 +1,5 @@
+"use strict"
+
 $(document).ready(function () {
 	let pwCheck = /^[a-zA-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,16}$/;
 
