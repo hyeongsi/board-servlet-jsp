@@ -44,5 +44,11 @@
 		<div class="col-10 mt-3">
 			<button class="btn btn-outline-primary" type="submit">작성하기</button>
 		</div>
+		<script>
+		function test(){
+			console.log($("#editor").val());
+		}
+		</script>
+		<button class="btn btn-outline-primary" type="button" onclick="test()">테스트</button>
 	</form>
 </section>

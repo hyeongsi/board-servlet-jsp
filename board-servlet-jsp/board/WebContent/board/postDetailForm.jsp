@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+
 <div class="my-1 text-center">
 	<h5 class="fw-bold">글 상세</h5>
 </div>
@@ -31,7 +33,7 @@
 			</div>
 					
 			<div class="border p-3">
-				<div>${boardDTO.boardcontent}</div>
+				<div class="ck-content">${boardDTO.boardcontent}</div>
 			</div>
 			
 		</div>
