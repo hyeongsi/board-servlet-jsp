@@ -19,8 +19,9 @@ import javax.servlet.http.Part;
 		maxRequestSize = 1024 * 1024 * 2
 )
 public class ImageUploadServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
+	static final String IMAGE_DOMAIN = "http://localhost:8090/board/images/";
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
         // 이미지를 저장할 디렉토리 경로 설정
@@ -39,7 +40,7 @@ public class ImageUploadServlet extends HttpServlet {
         
         part.write(sb.toString());
         
-        final String responseUrl = "http://localhost:8090/board/images/" + uuidFileName + extentionName;
+        final String responseUrl = IMAGE_DOMAIN + uuidFileName + extentionName;
         
         // 응답 데이터를 JSON 형식으로 생성
         final String jsonResponse = "{\"url\": \"" + responseUrl + "\"}";
