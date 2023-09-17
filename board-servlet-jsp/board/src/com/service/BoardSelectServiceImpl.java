@@ -13,29 +13,6 @@ import com.dto.SearchDTO;
 
 public class BoardSelectServiceImpl implements BoardSelectService {
 
-	public int uploadPost(final String title, final String boardcontent, final String name, final int id) {
-		int n = 0;
-		
-		final SqlSession session = MySqlSessionFactory.getSession();
-		try {
-			final BoardDTO dto = new BoardDTO();
-			dto.setTitle(title);
-			dto.setBoardcontent(boardcontent);
-			dto.setName(name);
-			dto.setId(id);
-			
-			final BoardDAO boardDAO = new BoardDAO();
-			n = boardDAO.uploadPost(session, dto);
-			
-			session.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return n;
-	}
-
 	@Override
 	public PageDTO getPageInfo(final int curPage) {
 		final SqlSession session = MySqlSessionFactory.getSession();

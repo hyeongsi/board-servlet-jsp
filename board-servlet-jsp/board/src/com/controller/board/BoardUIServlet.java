@@ -1,6 +1,8 @@
 package com.controller.board;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +34,9 @@ public class BoardUIServlet extends HttpServlet {
 		// 현재 페이지 기준의 게시글 리스트 얻기
 		final BoardSelectService service = new BoardSelectServiceImpl();
 		final PageDTO pageDTO = service.getPageInfo(curPage);
-
+		
+		String writetime = pageDTO.getList().get(0).getPageRenderingWritetime();
+		
 		// 메인화면(게시글) 화면 이동
 		final String path = SitePath.BOARD.getPath();
 		if(pageDTO != null)

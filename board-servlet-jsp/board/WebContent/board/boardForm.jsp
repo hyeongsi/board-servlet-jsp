@@ -32,7 +32,7 @@
 						<td class="py-3"><c:out value="${dto.boardid}" /></td>
 						<td class="py-3"><c:out value="${dto.title}" /></td>
 						<td class="py-3"><c:out value="${dto.name}" /></td>
-						<td class="py-3"><c:out value="${dto.writetime}" /></td>
+						<td class="py-3"><c:out value="${dto.getPageRenderingWritetime()}" /></td>
 						<td class="py-3"><c:out value="${dto.viewcnt}" /></td>
 					</tr>
 				</c:forEach>
