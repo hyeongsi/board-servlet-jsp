@@ -21,7 +21,7 @@ public class PostCreationUIServlet extends HttpServlet {
 		
 		final AlertHref href = new AlertHref(request);
 		String nextPage = null;
-		
+		 
 		if(isLogin) {	
 			nextPage = SitePath.POST_CREATION.getPath();
 		}else {			

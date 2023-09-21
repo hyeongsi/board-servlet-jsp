@@ -51,6 +51,7 @@ DROP TABLE servletboard.board_comment;
 CREATE TABLE servletboard.board_comment(
   commentid number PRIMARY KEY,
   content varchar2(200) not null,
+  writetime date default sysdate,
   
   parent_commentid number,
   boardid number,

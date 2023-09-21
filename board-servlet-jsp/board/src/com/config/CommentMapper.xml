@@ -10,9 +10,16 @@
 		values(board_comment_seq.nextval, #{content}, #{boardid}, #{id})
 	</insert>
 	
+	<insert id="uploadComment" parameterType="CommentDTO">
+		insert into board_comment (commentid, content, parent_commentid, boardid, id)
+		values(board_comment_seq.nextval, #{content}, #{parent_commentid}, #{boardid}, #{id})
+	</insert>
+	
 	<select id="getComment" parameterType="int" resultType="CommentDTO">
-		select commentid, content, parent_commentid, boardid, id, level
+		select commentid, content, writetime, parent_commentid, boardid, board_comment.id id, level, member.name name
 		from board_comment
+		inner join member 
+		on board_comment.id = member.id
 		where boardid = #{boardid}
 		start with parent_commentid is null
 		connect by prior commentid = parent_commentid

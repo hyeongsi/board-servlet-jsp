@@ -25,7 +25,7 @@ public enum SitePath {
 	REGISTER_UI("/board/memberRegistrationUI"),
 	SUCCESS_REGISTER_MEMBER("registerSuccess.jsp"),
 	
-	ALERT_HREF_FORM("/common/alertAndHrefForm.jsp");
+	ALERT_HREF_FORM("/board/common/alertAndHrefForm.jsp");
 
 	private final String path;
 	
