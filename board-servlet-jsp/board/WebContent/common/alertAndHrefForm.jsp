@@ -5,5 +5,5 @@
 	const msg = "${mesg}";
 	if(msg != '')
 		alert(msg);
-	location.href ="<c:url value='${path}' />";
+	location.href ="${path}";
 </script>
