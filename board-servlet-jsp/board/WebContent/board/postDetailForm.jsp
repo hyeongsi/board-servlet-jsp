@@ -40,7 +40,7 @@
 			</div>
 
 			<div class="border mb-3 p-3">
-				<div class="ck-content">${boardDTO.boardcontent}</div>
+				<div class="ck-content" style="min-height:250px">${boardDTO.boardcontent}</div>
 			</div>
 
 			<div class="border mb-3 p-3 ">
