@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.common.AlertHref;
 import com.common.LoginUser;
+import com.common.OverflowCheck;
+import com.common.OverflowCheck.LengthB;
 import com.common.enums.AlertMessage;
 import com.common.enums.SitePath;
 import com.dto.MemberDTO;
@@ -44,8 +46,11 @@ public class PostCreationServlet extends HttpServlet {
 
 		int result = FAIL_UPLOAD;
 		// overflow가 아니라면 upload 수행
-		if(!(BoardService.isOverflowTitle(title) ||
-				BoardService.isOverflowContent(boardcontent))) {
+		final int titleBytes = OverflowCheck.getBytesUtf8(title);
+		final int contentBytes = OverflowCheck.getBytesUtf8(boardcontent);
+		
+		if(!(OverflowCheck.isOverflow(titleBytes, LengthB.TITLE_LENGTHB)) ||
+				OverflowCheck.isOverflow(contentBytes, LengthB.CONTENT_LENGTHB)) {
 			
 			final BoardService service = new BoardServiceImpl();
 			result = service.uploadPost(title, boardcontent, name, id);

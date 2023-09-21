@@ -1,6 +1,7 @@
 package com.controller.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +13,13 @@ import com.common.AlertHref;
 import com.common.enums.AlertMessage;
 import com.common.enums.SitePath;
 import com.dto.BoardDTO;
+import com.dto.CommentDTO;
 import com.service.BoardSelectService;
 import com.service.BoardSelectServiceImpl;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
+import com.service.CommentService;
+import com.service.CommentServiceImpl;
 
 @WebServlet("/postDetailUI")
 public class PostDetailUIServlet extends HttpServlet {
@@ -38,6 +42,11 @@ public class PostDetailUIServlet extends HttpServlet {
 			
 			request.setAttribute("boardDTO", boardDTO);
 			nextPage = SitePath.POST_DETAIL.getPath();
+			
+			final CommentService commentService = new CommentServiceImpl();
+			List<CommentDTO> commentDTOList = commentService.getComment(boardid);
+			request.setAttribute("commentDTOList", commentDTOList);
+			
 		}else {
 			// 조회 실패 메시지, 메인화면(게시글) 이동 설정
 			nextPage = href.setAlertPath(AlertMessage.NOT_EXIST_POST, SitePath.BOARD_UI);

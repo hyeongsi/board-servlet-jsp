@@ -9,3 +9,4 @@ function fn_delete() {
 	$("#writterForm").attr("action", "postDeletion");
 	$("#writterForm").submit();
 }
+

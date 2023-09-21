@@ -11,6 +11,8 @@ public enum AlertMessage {
 	
 	NOT_EXIST_POST("게시글이 존재하지 않습니다."),
 	
+	FAILED_UPLOAD_COMMENT("댓글 작성 실패"),
+	
 	FAILED_LOGIN("아이디 또는 비밀번호가 일치하지 않습니다."),
 	
 	FAILED_UPDATE_MEMBER("내 정보 변경 실패"),

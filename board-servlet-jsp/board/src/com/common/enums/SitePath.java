@@ -8,6 +8,7 @@ public enum SitePath {
 	
 	POST_DETAIL("postDetail.jsp"),
 	POST_DETAIL_UI("/postDetailUI"),
+	POST_DETAIL_RETRIEVE("/board/postDetailUI"),
 	
 	POST_CREATION("postCreation.jsp"),
 	POST_CREATION_UI("postCreationUI"),

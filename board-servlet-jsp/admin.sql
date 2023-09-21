@@ -33,6 +33,7 @@ CREATE TABLE servletboard.board (
   name varchar2(30) not null 
 );
 
+/* 게시글 작성자 테이블 생성 */
 DROP TABLE servletboard.board_writter;
 CREATE TABLE servletboard.board_writter(
   boardid number,
@@ -42,10 +43,28 @@ CREATE TABLE servletboard.board_writter(
   on delete cascade
 );
 
-insert into servletboard.board (boardid, title, boardcontent, name)
-values (servletboard.board_seq.nextval, '제목1', '내용1', '홍길동');
+/* 댓글 테이블 생성 */
+DROP SEQUENCE servletboard.board_comment_seq;
+CREATE SEQUENCE servletboard.board_comment_seq;
 
-insert into servletboard.board_writter (boardid, id)
-values (servletboard.board_seq.currval, 1);
-commit;
-
+DROP TABLE servletboard.board_comment;
+CREATE TABLE servletboard.board_comment(
+  commentid number PRIMARY KEY,
+  content varchar2(200) not null,
+  
+  parent_commentid number,
+  boardid number,
+  id number,
+  
+  constraint board_comment_parent_cid_fk foreign key(parent_commentid)
+  references servletboard.board_comment(commentid)
+  on delete cascade,
+  
+  constraint board_comment_boardid_fk foreign key(boardid)
+  references servletboard.board(boardid)
+  on delete cascade,
+  
+  constraint board_comment_id_fk foreign key(id)
+  references servletboard.member(id)
+  on delete cascade
+);
