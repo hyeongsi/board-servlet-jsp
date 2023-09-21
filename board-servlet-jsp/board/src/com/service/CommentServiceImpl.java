@@ -71,4 +71,23 @@ public class CommentServiceImpl implements CommentService {
 		return n;
 	}
 
+	@Override
+	public int updateComment(final String content, final CommentDTO dto) {
+		int n = 0;
+		
+		final SqlSession session = MySqlSessionFactory.getSession();
+		try {
+			
+			final CommentDAO commentDAO = new CommentDAO();
+			n = commentDAO.updateComment(session, dto);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 }

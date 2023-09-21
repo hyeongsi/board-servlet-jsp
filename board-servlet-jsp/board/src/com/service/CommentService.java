@@ -9,4 +9,6 @@ public interface CommentService {
 	public int uploadComment(CommentDTO dto);
 	public List<CommentDTO> getComment(int boardid);
 	public int deleteComment(int commentid);
+	public int updateComment(String content, CommentDTO dto);
 }
+	

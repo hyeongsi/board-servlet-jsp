@@ -81,7 +81,7 @@
 									<c:if test="${login.id eq commentDTO.id}">
 										<a href="javascript:;" class="text-secondary"
 											style="font-size: 0.7rem; text-decoration: none"
-											onclick="edtComment(${commentDTO.commentid})">수정하기</a>
+											onclick="toggleEditModeComment(${commentDTO.commentid})">수정하기</a>
 										<span class="vr"></span>
 										<a
 											href="CommentDelete?commentid=${commentDTO.commentid}&boardid=${commentDTO.boardid}&id=${commentDTO.id}"
@@ -91,15 +91,36 @@
 								</div>
 							</div>
 
-							<div class="p-2" style="white-space: pre-wrap">${commentDTO.content}</div>
+							<div class="p-2" style="white-space: pre-wrap" id="content${commentDTO.commentid}">${commentDTO.content}</div>
+							
+							<!-- 수정 입력창 -->
+							<div id="updateCmtForm${commentDTO.commentid}" class="d-none">
+								<form action="CommentUpdate" method="post">
+									<div class="input-group">
+										<input type="hidden" name="commentid"
+											value="${commentDTO.commentid}">
+										<input type="hidden" name="boardid" id="boardid"
+											value="${boardDTO.boardid}"> <input type="hidden"
+											name="writerid" value="${boardDTO.id}">
+										<textarea class="form-control" name="content">${commentDTO.content}</textarea>
+									</div>
+									<div class="mt-2 text-end">
+										<button class="btn btn-outline-secondary btn-sm" type="submit">등록</button>
+										<button class="btn btn-outline-secondary btn-sm" type="button" onclick="">취소</button>
+									</div>
+									
+								</form>
+							</div>
+							
+							<!-- 대댓글 입력창 -->
 							<div id="inputReCmt${commentDTO.commentid}" class="d-none">
 								<form action="CommentUpload" method="post">
 									<div class="input-group">
 										<input type="hidden" name="parent_commentid"
-											id="parent_commentid" value="${commentDTO.commentid}">
-										<input type="hidden" name="boardid" id="boardid"
+											 value="${commentDTO.commentid}">
+										<input type="hidden" name="boardid" 
 											value="${boardDTO.boardid}"> <input type="hidden"
-											name="id" id="id" value="${boardDTO.id}">
+											name="id"  value="${boardDTO.id}">
 										<textarea class="form-control" name="content"></textarea>
 										<button class="btn btn-outline-secondary" type="submit">입력</button>
 									</div>

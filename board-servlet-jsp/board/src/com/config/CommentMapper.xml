@@ -30,4 +30,10 @@
 		where commentid = #{commentid}
 	</delete>
 	
+	<update id="updateComment" parameterType="CommentDTO">
+		update board_comment 
+		set content = #{content}, writetime = sysdate
+		where commentid = #{commentid}
+	</update>
+	
 </mapper>

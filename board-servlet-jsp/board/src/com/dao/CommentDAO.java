@@ -23,4 +23,8 @@ public class CommentDAO {
 	public int deleteComment(final SqlSession session, final int commentid) {
 		return session.delete("CommentMapper.deleteComment", commentid);
 	}
+	
+	public int updateComment(final SqlSession session, final CommentDTO dto) {
+		return session.update("CommentMapper.updateComment", dto);
+	}
 }
