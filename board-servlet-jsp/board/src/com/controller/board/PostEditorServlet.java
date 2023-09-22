@@ -39,6 +39,14 @@ public class PostEditorServlet extends HttpServlet {
 		final String title = request.getParameter("title");
 		final String boardcontent = request.getParameter("boardcontent");
 		
+		final boolean isEmptyTitle = title.trim().isEmpty();
+		if(isEmptyTitle) {
+			nextPage = href.setAlertPath(AlertMessage.FAILED_UPDATE_POST, 
+							SitePath.BOARD_UI);
+			request.getRequestDispatcher(nextPage).forward(request, response);
+			return;
+		}
+		
 		int result = FAIL_UPDATE;
 		// overflow가 아니라면 update 수행
 		final int titleBytes = OverflowCheck.getBytesUtf8(title);

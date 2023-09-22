@@ -43,7 +43,15 @@ public class PostCreationServlet extends HttpServlet {
 		final String boardcontent = request.getParameter("boardcontent");
 		final String name = loginUserDTO.getName();
 		final int id = loginUserDTO.getId();
-
+		
+		final boolean isEmptyTitle = title.trim().isEmpty();
+		if(isEmptyTitle) {
+			nextPage = href.setAlertPath(AlertMessage.FAILED_UPLOAD_POST, 
+							SitePath.POST_CREATION_UI);
+			request.getRequestDispatcher(nextPage).forward(request, response);
+			return;
+		}
+		
 		int result = FAIL_UPLOAD;
 		// overflow가 아니라면 upload 수행
 		final int titleBytes = OverflowCheck.getBytesUtf8(title);
