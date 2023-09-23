@@ -29,7 +29,7 @@ Servlet 대신 Spring MVC를 쓰는 이유를 겪어보기 위해 프로젝트�
 ### 🖼️ ERD
 <img src="https://user-images.githubusercontent.com/71202869/270110609-81f26476-1d9f-4c0e-8d1d-b9ed8aa66c2a.PNG"/>
 
-##
+### 🎞 프로젝트 내용 
 <table>
   <tr><th>메인</th></tr>
   <tr>
