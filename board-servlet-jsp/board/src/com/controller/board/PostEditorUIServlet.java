@@ -8,46 +8,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.AlertHref;
-import com.common.LoginUser;
+import com.common.LoginUtil;
+import com.common.TextHtmlUtil;
 import com.common.enums.AlertMessage;
-import com.common.enums.SitePath;
+import com.common.enums.Location;
 import com.dto.BoardDTO;
 import com.service.BoardSelectService;
 import com.service.BoardSelectServiceImpl;
 
+@SuppressWarnings("serial")
 @WebServlet("/postEditorUI")
 public class PostEditorUIServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		final boolean isLogin = LoginUser.isLogin(request); 
+		final boolean isLogin = LoginUtil.isLogin(request); 	
+		if(!isLogin) {
+			TextHtmlUtil.autoProcessNeedLoginLocation(response);
+			return;
+		}	
+
+		final int boardid = Integer.parseInt(request.getParameter("boardid"));
 		
-		final AlertHref href = new AlertHref(request);
-		String nextPage = null;
+		final BoardSelectService service = new BoardSelectServiceImpl();
+		final BoardDTO boardDTO = service.getPostDetail(boardid);
 		
-		if(isLogin) {
-			final int boardid = Integer.parseInt(request.getParameter("boardid"));
+		if(boardDTO == null) {
+			final String message = AlertMessage.NOT_EXIST_POST.toString();
+			final String location = Location.UI_BOARD_REDIRECT.toString();
 			
-			final BoardSelectService service = new BoardSelectServiceImpl();
-			final BoardDTO boardDTO = service.getPostDetail(boardid);
-			if(boardDTO != null) {
-				request.setAttribute("boardDTO", boardDTO);
-				nextPage = SitePath.POST_EDITOR.getPath();
-			}else {
-				// 없는 게시글 메시지, 메인화면(게시글) 이동 설정
-				nextPage = href.setAlertPath(AlertMessage.NOT_EXIST_POST, SitePath.BOARD_UI);
-			}
-		}else {		
-			// 로그인 필요 메시지, 로그인 화면 이동 설정
-			nextPage = href.setNeedLoginPath();
+			TextHtmlUtil.autoProcessMessageAndLocation(response, message, location);
+			return;
 		}
 		
-		request.getRequestDispatcher(nextPage).forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		final String location = Location.POST_EDITOR_JSP.toString();
+		
+		request.setAttribute("boardDTO", boardDTO);
+		request.getRequestDispatcher(location).forward(request, response);
 	}
 
 }

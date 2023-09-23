@@ -7,18 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.enums.SitePath;
+import com.common.enums.Location;
 
+@SuppressWarnings("serial")
 @WebServlet("/memberRegistrationUI")
 public class MemberRegistrationUIServlet extends HttpServlet {    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = SitePath.MEMBER_REGISTRATION.getPath();
-		request.getRequestDispatcher(path).forward(request, response);
+		
+		final String location = Location.MEMBER_REGISTRATION_JSP.toString();
+		request.getRequestDispatcher(location).forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
+	
 }

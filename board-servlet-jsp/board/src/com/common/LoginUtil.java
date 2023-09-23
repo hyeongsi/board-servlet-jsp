@@ -5,10 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.MemberDTO;
 
-public class LoginUser {
+public class LoginUtil {
 	final static String LOGIN_ATTR_STR = "login";
 	
-	private LoginUser() {}
+	private LoginUtil() {}
 	
 	// 로그인 여부 반환
 	public static boolean isLogin(final HttpServletRequest request) {

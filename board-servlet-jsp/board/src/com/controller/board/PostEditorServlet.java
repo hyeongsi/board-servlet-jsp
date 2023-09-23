@@ -2,36 +2,30 @@ package com.controller.board;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.AlertHref;
-import com.common.LoginUser;
+import com.common.LoginUtil;
 import com.common.OverflowCheck;
 import com.common.OverflowCheck.LengthB;
+import com.common.TextHtmlUtil;
 import com.common.enums.AlertMessage;
-import com.common.enums.SitePath;
+import com.common.enums.Location;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
+@SuppressWarnings("serial")
 @WebServlet("/postEditor")
 public class PostEditorServlet extends HttpServlet {
-
-	private final static int FAIL_UPDATE = 0;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boolean isLogin = LoginUser.isLogin(request);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		final AlertHref href = new AlertHref(request);
-		String nextPage = null;
-		
+		final boolean isLogin = LoginUtil.isLogin(request);
 		if(!isLogin) {
-			nextPage = href.setNeedLoginPath();
-			request.getRequestDispatcher(nextPage).forward(request, response);
+			TextHtmlUtil.autoProcessNeedLoginLocation(response);
 			return;
 		}
 			
@@ -41,37 +35,41 @@ public class PostEditorServlet extends HttpServlet {
 		
 		final boolean isEmptyTitle = title.trim().isEmpty();
 		if(isEmptyTitle) {
-			nextPage = href.setAlertPath(AlertMessage.FAILED_UPDATE_POST, 
-							SitePath.BOARD_UI);
-			request.getRequestDispatcher(nextPage).forward(request, response);
+			final String message = AlertMessage.FAILED_EDIT_POST.toString();
+			final String location = Location.UI_BOARD.toString();
+			
+			TextHtmlUtil.autoProcessMessageAndLocation(response, message, location);
 			return;
 		}
 		
+		final int FAIL_UPDATE = 0;
 		int result = FAIL_UPDATE;
-		// overflow가 아니라면 update 수행
+		
 		final int titleBytes = OverflowCheck.getBytesUtf8(title);
 		final int contentBytes = OverflowCheck.getBytesUtf8(boardcontent);
 		
-		if(!(OverflowCheck.isOverflow(titleBytes, LengthB.TITLE_LENGTHB)) ||
-				OverflowCheck.isOverflow(contentBytes, LengthB.CONTENT_LENGTHB)) {
-			
+		final boolean isOverflowTitle = OverflowCheck.isOverflow(titleBytes, LengthB.TITLE_LENGTHB);
+		final boolean isOverflowContent = OverflowCheck.isOverflow(contentBytes, LengthB.CONTENT_LENGTHB);
+		
+		final boolean isOverflow = isOverflowTitle || isOverflowContent;
+		if(!isOverflow) {
 			final BoardService service = new BoardServiceImpl();
 			result = service.updatePost(boardid, title, boardcontent);
 		}
-		
-		// 수정 실패
-		if(result == FAIL_UPDATE) {
-			nextPage = href.setAlertPath(AlertMessage.FAILED_UPDATE_POST, SitePath.BOARD_UI);
-		}
-		// 수정 성공
-		else {
-			nextPage = href.setAlertPath(AlertMessage.SUCCESS_UPDATE_POST, SitePath.BOARD_UI);
-		}
-		request.getRequestDispatcher(nextPage).forward(request, response);
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String message = null;
+		String location = null;
+
+		if(result == FAIL_UPDATE) {
+			message = AlertMessage.FAILED_EDIT_POST.toString();
+			location = Location.UI_BOARD_REDIRECT.toString();
+		}
+		else {
+			message = AlertMessage.SUCCESS_EDIT_POST.toString();
+			location = Location.UI_BOARD_REDIRECT.toString();
+		}
+		
+		TextHtmlUtil.autoProcessMessageAndLocation(response, message, location);
 	}
 
 }

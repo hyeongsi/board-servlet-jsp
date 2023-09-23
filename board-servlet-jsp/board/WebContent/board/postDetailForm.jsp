@@ -31,7 +31,7 @@
 
 		<div class="mb-3 col-10">
 			<div class="border mb-3 p-3">
-				<div name="title" class="mb-3" id="title">${boardDTO.title}</div>
+				<div name="title" class="mb-3" id="title"><c:out value="${boardDTO.title}" /></div>
 				<div class="text-end" style="font-size: 0.7rem">
 					<span class="me-3">작성자 <c:out value="${boardDTO.name}" /></span> <span
 						class="me-3">조회 <c:out value="${boardDTO.viewcnt+1}" /></span> <span><c:out
@@ -68,8 +68,8 @@
 						<div class="flex-fill">
 							<div class="d-flex justify-content-between">
 								<div>
-									<span class="me-3"><b>${commentDTO.name}</b></<span>
-												<span class="text-secondary" style="font-size: 0.7rem">${commentDTO.writetime}</<span>
+									<span class="me-3"><b><c:out value="${commentDTO.name}" /></b></span>
+												<span class="text-secondary" style="font-size: 0.7rem"><c:out value="${commentDTO.writetime}" /></span>
 								</div>
 								<div>
 									<c:if test="${not empty login}">
@@ -84,18 +84,18 @@
 											onclick="toggleEditModeComment(${commentDTO.commentid})">수정하기</a>
 										<span class="vr"></span>
 										<a
-											href="CommentDelete?commentid=${commentDTO.commentid}&boardid=${commentDTO.boardid}&id=${commentDTO.id}"
+											href="CommentDeletion?commentid=${commentDTO.commentid}&boardid=${commentDTO.boardid}&id=${commentDTO.id}"
 											class="text-secondary"
 											style="font-size: 0.7rem; text-decoration: none">삭제하기</a>
 									</c:if>
 								</div>
 							</div>
 
-							<div class="p-2" style="white-space: pre-wrap" id="content${commentDTO.commentid}">${commentDTO.content}</div>
+							<div class="p-2" style="white-space: pre-wrap" id="content${commentDTO.commentid}"><c:out value="${commentDTO.content}" /></div>
 							
 							<!-- 수정 입력창 -->
 							<div id="updateCmtForm${commentDTO.commentid}" class="d-none">
-								<form action="CommentUpdate" method="post">
+								<form action="CommentEditor" method="post">
 									<div class="input-group">
 										<input type="hidden" name="commentid"
 											value="${commentDTO.commentid}">
@@ -114,7 +114,7 @@
 							
 							<!-- 대댓글 입력창 -->
 							<div id="inputReCmt${commentDTO.commentid}" class="d-none">
-								<form action="CommentUpload" method="post">
+								<form action="CommentUploader" method="post">
 									<div class="input-group">
 										<input type="hidden" name="parent_commentid"
 											 value="${commentDTO.commentid}">
@@ -135,7 +135,7 @@
 
 				<c:choose>
 					<c:when test="${not empty login}">
-						<form action="CommentUpload" method="post">
+						<form action="CommentUploader" method="post">
 							<div class="input-group">
 								<input type="hidden" name="boardid" id="boardid"
 									value="${boardDTO.boardid}"> <input type="hidden"

@@ -8,32 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.AlertHref;
-import com.common.LoginUser;
-import com.common.enums.SitePath;
+import com.common.LoginUtil;
+import com.common.TextHtmlUtil;
+import com.common.enums.Location;
 
+@SuppressWarnings("serial")
 @WebServlet("/postCreationUI")
 public class PostCreationUIServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		final boolean isLogin = LoginUser.isLogin(request);
-		
-		final AlertHref href = new AlertHref(request);
-		String nextPage = null;
-		 
-		if(isLogin) {	
-			nextPage = SitePath.POST_CREATION.getPath();
-		}else {			
-			// 로그인 필요 메시지, 로그인 화면 이동 설정
-			nextPage = href.setNeedLoginPath();
+		final boolean isLogin = LoginUtil.isLogin(request);
+		if(!isLogin) {	
+			TextHtmlUtil.autoProcessNeedLoginLocation(response);
+			return;
 		}
 		
-		request.getRequestDispatcher(nextPage).forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		final String location = Location.POST_CREATION_JSP.toString();
+		request.getRequestDispatcher(location).forward(request, response);
 	}
 
 }

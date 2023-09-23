@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
-import com.dao.BoardDAO;
 import com.dao.BoardSelectDAO;
 import com.dto.BoardDTO;
 import com.dto.PageDTO;

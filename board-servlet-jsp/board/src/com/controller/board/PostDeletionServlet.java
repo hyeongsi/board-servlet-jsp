@@ -7,50 +7,44 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.common.AlertHref;
-import com.common.LoginUser;
+import com.common.LoginUtil;
+import com.common.TextHtmlUtil;
 import com.common.enums.AlertMessage;
-import com.common.enums.SitePath;
-import com.dto.MemberDTO;
+import com.common.enums.Location;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
+@SuppressWarnings("serial")
 @WebServlet("/postDeletion")
 public class PostDeletionServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		final boolean isLogin = LoginUtil.isLogin(request);
+		if(!isLogin) {
+			TextHtmlUtil.autoProcessNeedLoginLocation(response);
+			return;
+		}
+			
+		final int boardid = Integer.parseInt(request.getParameter("boardid"));
+		
+		final BoardService service = new BoardServiceImpl();
+		final int result = service.deletePost(boardid);
+		
 		final int FAIL_DELETE = 0;
+		String message = null;
+		String location = null;
 		
-		final boolean isLogin = LoginUser.isLogin(request);
-		
-		final AlertHref href = new AlertHref(request);
-		String nextPage = null;
-		
-		if(isLogin) {
-			final int boardid = Integer.parseInt(request.getParameter("boardid"));
-			
-			final BoardService service = new BoardServiceImpl();
-			final int result = service.deletePost(boardid);
-			
-			if(result == FAIL_DELETE) {
-				// 삭제 실패 메시지, 글 상세 화면 이동 설정
-				nextPage = href.setAlertPath(AlertMessage.FAILED_DELETE_POST, SitePath.POST_DETAIL_UI);
-			}else {
-				// 삭제 성공 메시지, 메인화면(게시글) 이동 설정
-				nextPage = href.setAlertPath(AlertMessage.SUCCESS_DELETE_POST, SitePath.BOARD_UI);
-			}
+		if(result == FAIL_DELETE) {
+			message = AlertMessage.FAILED_DELETE_POST.toString();
+			location = Location.UI_POST_DETAIL.toString();
 		}else {
-			// 로그인 필요 메시지, 로그인 화면 이동 설정
-			nextPage = href.setNeedLoginPath();
+			message = AlertMessage.SUCCESS_DELETE_POST.toString();
+			location = Location.UI_BOARD_REDIRECT.toString();
 		}
 		
-		request.getRequestDispatcher(nextPage).forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		TextHtmlUtil.autoProcessMessageAndLocation(response, message, location);
 	}
 
 }

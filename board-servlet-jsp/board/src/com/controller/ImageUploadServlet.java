@@ -1,9 +1,6 @@
 package com.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -14,17 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+@SuppressWarnings("serial")
 @WebServlet("/imageUploadServlet")
 @MultipartConfig(
 		maxRequestSize = 1024 * 1024 * 2
 )
 public class ImageUploadServlet extends HttpServlet {
-
-	static final String IMAGE_DOMAIN = "http://localhost:8090/board/images/";
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-        // 이미지를 저장할 디렉토리 경로 설정
         final String uploadDirectory = System.getProperty("catalina.base") + "/webapps/board/images";
         
         final Part part = request.getPart("file");
@@ -40,6 +35,7 @@ public class ImageUploadServlet extends HttpServlet {
         
         part.write(sb.toString());
         
+    	final String IMAGE_DOMAIN = "http://localhost:8090/board/images/";
         final String responseUrl = IMAGE_DOMAIN + uuidFileName + extentionName;
         
         // 응답 데이터를 JSON 형식으로 생성

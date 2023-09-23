@@ -7,18 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.AlertHref;
+import com.common.TextHtmlUtil;
 import com.common.enums.AlertMessage;
-import com.common.enums.SitePath;
+import com.common.enums.Location;
 import com.dto.MemberDTO;
 import com.service.MemberService;
 import com.service.MemberServiceImpl;
 
+@SuppressWarnings("serial")
 @WebServlet("/memberRegistration")
 public class MemberRegistrationServlet extends HttpServlet {    
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final int FAIL_REGISTRATION = 0;
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		final String userid = request.getParameter("userid");
 		final String pw = request.getParameter("pw");
@@ -28,23 +28,20 @@ public class MemberRegistrationServlet extends HttpServlet {
 		
 		final MemberService service = new MemberServiceImpl();
 		final int result = service.registerMember(dto);
-		
-		final AlertHref href = new AlertHref(request);
-		String nextPage = null;
-		
+			
+		final int FAIL_REGISTRATION = 0;
 		if(result == FAIL_REGISTRATION) {
-			nextPage = href.setAlertPath(AlertMessage.FAILED_REGISTER_MEMBER, 
-										SitePath.REGISTER_UI);
-		}else {
-			nextPage = href.setAlertPath(AlertMessage.SUCCESS_REGISTER_MEMBER, 
-										SitePath.SUCCESS_REGISTER_MEMBER);
+			final String message = AlertMessage.FAILED_REGISTER_MEMBER.toString();
+			final String location = Location.REGISTER_UI.toString();
+			
+			TextHtmlUtil.autoProcessMessageAndLocation(response, message, location);
+			return;
 		}
 		
-		request.getRequestDispatcher("registerSuccess.jsp").forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		final String message = AlertMessage.SUCCESS_REGISTER_MEMBER.toString();
+		final String location = Location.SUCCESS_REGISTER_MEMBER_JSP.toString();
+		
+		TextHtmlUtil.autoProcessMessageAndLocation(response, message, location);
 	}
 
 }

@@ -19,7 +19,7 @@
 			<div class="input-group">
 				<input type="hidden" name="boardid" value="<c:out value='${boardDTO.boardid}'/>" />
 				<span class="input-group-text">제목</span>
-				<input type="text" class="form-control" name="title" id="title" value="${boardDTO.title}" required />
+				<input type="text" class="form-control" name="title" id="title" value="<c:out value='${boardDTO.title}' />" required />
 			</div>
 		</div>
 

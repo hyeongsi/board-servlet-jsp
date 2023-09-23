@@ -1,10 +1,5 @@
 package com.service;
 
-import java.io.UnsupportedEncodingException;
-
-import com.dto.BoardDTO;
-import com.dto.PageDTO;
-
 public interface BoardService {
 	
 	// 게시글 추가

@@ -6,13 +6,13 @@ public enum AlertMessage {
 	
 	SUCCESS_DELETE_POST("게시글 삭제 성공"),
 	
-	FAILED_UPDATE_POST("게시글 수정 실패"),
-	SUCCESS_UPDATE_POST("게시글 수정 성공"),
+	FAILED_EDIT_POST("게시글 수정 실패"),
+	SUCCESS_EDIT_POST("게시글 수정 성공"),
 	
 	NOT_EXIST_POST("게시글이 존재하지 않습니다."),
 	
 	FAILED_UPLOAD_COMMENT("댓글 작성 실패"),
-	FAILED_UPDATE_COMMENT("댓글 수정 실패"),
+	FAILED_EDIT_COMMENT("댓글 수정 실패"),
 	
 	FAILED_LOGIN("아이디 또는 비밀번호가 일치하지 않습니다."),
 	
@@ -34,7 +34,7 @@ public enum AlertMessage {
 		this.message = message;
 	}
 	
-	public String getMessage() {
+	public String toString() {
 		return message;
 	}
 }

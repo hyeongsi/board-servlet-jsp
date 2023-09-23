@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.enums.SitePath;
+import com.common.enums.Location;
 import com.dto.PageDTO;
 import com.dto.SearchDTO;
 import com.service.BoardSelectService;
 import com.service.BoardSelectServiceImpl;
 
+@SuppressWarnings("serial")
 @WebServlet("/postSearchServlet")
 public class PostSearchServlet extends HttpServlet {
        
@@ -26,10 +27,6 @@ public class PostSearchServlet extends HttpServlet {
 		
 		final String searchType = request.getParameter("searchType");
 		final String search = request.getParameter("search");
-		
-		final SearchDTO searchDTO = new SearchDTO();
-		searchDTO.setSearchType(searchType);
-		searchDTO.setSearch(search);
 		
 		// 현재 페이지 기준의 게시글 리스트 얻기
 		final BoardSelectService service = new BoardSelectServiceImpl();
@@ -46,22 +43,19 @@ public class PostSearchServlet extends HttpServlet {
 			pageDTO = service.getSearchNamePageInfo(curPage, search);
 			break;
 		default:
-			response.sendRedirect(SitePath.BOARD_UI.getPath());
-			return;
+			throw new RuntimeException("not found searchType");
 		}
 
-		// 메인화면(게시글) 화면 이동
-		final String path = SitePath.BOARD.getPath();
+		final SearchDTO searchDTO = new SearchDTO();
+		searchDTO.setSearchType(searchType);
+		searchDTO.setSearch(search);
+		
+		final String location = Location.BOARD_JSP.toString();
+		
 		if(pageDTO != null)
 			request.setAttribute("pageDTO", pageDTO);
-		// 페이지네이션 검색에 활용하기 위해 저장
 		request.setAttribute("searchDTO", searchDTO);
-		
-		request.getRequestDispatcher(path).forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		request.getRequestDispatcher(location).forward(request, response);
 	}
 
 }

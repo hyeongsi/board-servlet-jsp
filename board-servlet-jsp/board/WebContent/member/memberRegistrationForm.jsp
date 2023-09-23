@@ -40,7 +40,6 @@
 		</div>
 		<div class="col-12 mt-5">
 			<button class="btn btn-outline-success rounded-3" type="submit">가입하기</button>
-			<button class="btn btn-outline-warning rounded-3" type="reset">취소하기</button>
 		</div>
 	</form>
 </section>

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.AlertHref;
+import com.common.TextHtmlUtil;
 import com.common.enums.AlertMessage;
-import com.common.enums.SitePath;
+import com.common.enums.Location;
 import com.dto.BoardDTO;
 import com.dto.CommentDTO;
 import com.service.BoardSelectService;
@@ -21,6 +21,7 @@ import com.service.BoardServiceImpl;
 import com.service.CommentService;
 import com.service.CommentServiceImpl;
 
+@SuppressWarnings("serial")
 @WebServlet("/postDetailUI")
 public class PostDetailUIServlet extends HttpServlet {
 
@@ -28,35 +29,28 @@ public class PostDetailUIServlet extends HttpServlet {
 
 		final int boardid = Integer.parseInt(request.getParameter("boardid"));
 		
-		// 게시글 상세내용 읽어오기
 		final BoardSelectService selectService = new BoardSelectServiceImpl();
 		final BoardDTO boardDTO = selectService.getPostDetail(boardid);
 		
-		final AlertHref href = new AlertHref(request);
-		String nextPage = null;
-		
-		if(boardDTO != null) {
-			// 조회수 증가
-			final BoardService service = new BoardServiceImpl();
-			service.increaseViewcnt(boardid);
+		if(boardDTO == null) {
+			final String message = AlertMessage.NOT_EXIST_POST.toString();
+			final String location = Location.UI_BOARD.toString();
 			
-			request.setAttribute("boardDTO", boardDTO);
-			nextPage = SitePath.POST_DETAIL.getPath();
-			
-			final CommentService commentService = new CommentServiceImpl();
-			List<CommentDTO> commentDTOList = commentService.getComment(boardid);
-			request.setAttribute("commentDTOList", commentDTOList);
-			
-		}else {
-			// 조회 실패 메시지, 메인화면(게시글) 이동 설정
-			nextPage = href.setAlertPath(AlertMessage.NOT_EXIST_POST, SitePath.BOARD_UI);
+			TextHtmlUtil.autoProcessMessageAndLocation(response, message, location);
+			return;
 		}
+			
+		final BoardService service = new BoardServiceImpl();
+		service.increaseViewcnt(boardid);
 		
-		request.getRequestDispatcher(nextPage).forward(request, response);
-	}
+		final String location = Location.POST_DETAIL_JSP.toString();
+		
+		final CommentService commentService = new CommentServiceImpl();
+		List<CommentDTO> commentDTOList = commentService.getComment(boardid);
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		request.setAttribute("boardDTO", boardDTO);
+		request.setAttribute("commentDTOList", commentDTOList);
+		request.getRequestDispatcher(location).forward(request, response);
 	}
 
 }

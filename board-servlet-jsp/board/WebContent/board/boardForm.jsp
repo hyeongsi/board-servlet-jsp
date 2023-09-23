@@ -42,7 +42,7 @@
 		<div class="col-8 mb-3">
 			<form action="boardUI" method="get" class="row">
 				<div class="col-4" style="min-width:110px;">
-					<select name="searchType" class="form-select" id="select_searchType" data-searchType=${searchDTO.searchType}>
+					<select name="searchType" class="form-select" id="select_searchType" data-searchType="${searchDTO.searchType}">
 					  <option value="title" id="opt_title">제목</option>
 					  <option value="content" id="opt_content">내용</option>
 					  <option value="name" id="opt_name">작성자</option>
