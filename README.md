@@ -20,17 +20,17 @@ https://github.com/hyeongsi/board-servlet-jsp/wiki
 <table>
   <tr><th colspan="3">front</th></tr>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/71202869/270113100-970694ca-57fc-44ff-b5ce-fb13d6cf0f15.png" width="250" height="150" /></td>
-    <td><img src="https://user-images.githubusercontent.com/71202869/270113193-ac857628-bdeb-4385-bee3-f03268e8bf3e.png" width="250" height="150" /></td>
-    <td><img src="https://user-images.githubusercontent.com/71202869/270112963-383fec32-c409-48c7-85ab-2c74d97fc4b1.png" width="250" height="150" /></td>
+    <td><img src="https://user-images.githubusercontent.com/71202869/270113100-970694ca-57fc-44ff-b5ce-fb13d6cf0f15.png" width="150" height="100" /></td>
+    <td><img src="https://user-images.githubusercontent.com/71202869/270113193-ac857628-bdeb-4385-bee3-f03268e8bf3e.png" width="150" height="100" /></td>
+    <td><img src="https://user-images.githubusercontent.com/71202869/270112963-383fec32-c409-48c7-85ab-2c74d97fc4b1.png" width="150" height="100" /></td>
   </tr>
 </table>
 <table>
   <tr><th colspan="3">back</th></tr>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/71202869/270113105-5a8908ad-8deb-4fcc-a1b8-27d1e17095de.jpg" width="250" height="150" /></td>
-    <td><img src="https://user-images.githubusercontent.com/71202869/270113209-7a57f25c-d00b-4195-b69a-0bcef140abfe.png" width="250" height="150" /></td>
-    <td><img src="https://user-images.githubusercontent.com/71202869/270142401-e8d30789-4391-4c4c-862a-be04c4288716.png" width="250" height="150" /></td>
+    <td><img src="https://user-images.githubusercontent.com/71202869/270113105-5a8908ad-8deb-4fcc-a1b8-27d1e17095de.jpg" width="150" height="100" /></td>
+    <td><img src="https://user-images.githubusercontent.com/71202869/270113209-7a57f25c-d00b-4195-b69a-0bcef140abfe.png" width="150" height="100" /></td>
+    <td><img src="https://user-images.githubusercontent.com/71202869/270142401-e8d30789-4391-4c4c-862a-be04c4288716.png" width="150" height="100" /></td>
   </tr>
 </table>
 
