@@ -16,10 +16,11 @@ Servlet 대신 Spring MVC를 쓰는 이유를 겪어보기 위해 프로젝트�
   </tr>
 </table>
 <table>
-  <tr><th colspan="2">back</th></tr>
+  <tr><th colspan="3">back</th></tr>
   <tr>
     <td><img src="https://user-images.githubusercontent.com/71202869/270113105-5a8908ad-8deb-4fcc-a1b8-27d1e17095de.jpg" width="250" height="150" /></td>
     <td><img src="https://user-images.githubusercontent.com/71202869/270113209-7a57f25c-d00b-4195-b69a-0bcef140abfe.png" width="250" height="150" /></td>
+    <td><img src="https://user-images.githubusercontent.com/71202869/270142401-e8d30789-4391-4c4c-862a-be04c4288716.png" width="250" height="150" /></td>
   </tr>
 </table>
 
